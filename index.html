@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>AntoninGPT — 0 to 100</title>
+<meta name="description" content="Le kiné de la team 0 to 100 se repose. AntoninGPT prend le relais : 1 exercice, 1 verre de vin." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🍷%3C/text%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #07090e;
+    --surface: rgba(16, 22, 34, 0.88);
+    --surface-lo: rgba(12, 17, 27, 0.7);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-hi: rgba(255, 255, 255, 0.14);
+    --text: #e8edf5;
+    --text-soft: #8a97a8;
+    --text-muted: #44505f;
+    --accent: #ff6b00;
+    --accent-soft: rgba(255, 107, 0, 0.12);
+    --accent-dim: rgba(255, 107, 0, 0.38);
+    --wine: #a8324f;
+    --wine-soft: rgba(168, 50, 79, 0.16);
+    --radius: 12px;
+    --radius-card: 22px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 50% -10%, rgba(255,107,0,0.18), transparent 70%),
+      radial-gradient(ellipse 40% 30% at 100% 100%, rgba(168,50,79,0.18), transparent 70%);
+  }
+  header {
+    padding: calc(14px + env(safe-area-inset-top, 0px)) 18px 12px;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    background: rgba(7, 9, 14, 0.7);
+    position: sticky; top: 0; z-index: 5;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--wine));
+    display: grid; place-items: center;
+    font-family: "Barlow Condensed", Inter, sans-serif; font-weight: 900; font-size: 22px;
+    color: #fff; flex-shrink: 0;
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .avatar.small { width: 28px; height: 28px; font-size: 14px; box-shadow: none; }
+  h1 {
+    margin: 0;
+    font-family: "Barlow Condensed", Inter, sans-serif;
+    font-weight: 900; font-size: 26px; letter-spacing: 0.5px; line-height: 1;
+    text-transform: uppercase;
+  }
+  h1 span { color: var(--accent); }
+  .status { font-size: 12px; color: var(--text-soft); display: flex; align-items: center; gap: 6px; margin-top: 3px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: #3ecf6c; box-shadow: 0 0 6px #3ecf6c; }
+  .model { margin-left: auto; font-size: 11px; color: var(--text-muted); text-align: right; line-height: 1.3; }
+  .model b { color: var(--text-soft); font-weight: 600; display: block; }
+
+  main { flex: 1; width: 100%; max-width: 640px; margin: 0 auto; padding: 18px 16px 8px; display: flex; flex-direction: column; gap: 14px; }
+
+  .msg { display: flex; gap: 10px; align-items: flex-end; animation: pop .25s ease-out; }
+  .msg.user { flex-direction: row-reverse; }
+  .bubble {
+    padding: 12px 14px; border-radius: 18px; max-width: 86%;
+    background: var(--surface); border: 1px solid var(--border);
+  }
+  .msg.user .bubble { background: var(--accent); color: #0a0a0a; border-color: transparent; font-weight: 600; border-bottom-right-radius: 4px; }
+  .msg.bot .bubble { border-bottom-left-radius: 4px; }
+  .bubble p { margin: 0 0 8px; }
+  .bubble p:last-child { margin-bottom: 0; }
+  @keyframes pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .card { border-radius: var(--radius); padding: 12px 14px; margin-top: 10px; border: 1px solid var(--border-hi); }
+  .card.exo { background: var(--accent-soft); border-color: var(--accent-dim); }
+  .card.vin { background: var(--wine-soft); border-color: rgba(168,50,79,0.5); }
+  .card .label {
+    font-family: "Barlow Condensed", Inter, sans-serif; font-weight: 700; font-size: 13px;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-soft); margin-bottom: 4px;
+  }
+  .card.exo .label { color: var(--accent); }
+  .card.vin .label { color: #e06a86; }
+  .card .title { font-family: "Barlow Condensed", Inter, sans-serif; font-weight: 900; font-size: 22px; line-height: 1.1; text-transform: uppercase; }
+  .card .dose { font-size: 13px; color: var(--text-soft); font-weight: 600; margin: 2px 0 6px; }
+  .card .why { font-size: 14px; color: var(--text); }
+  .foot { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+
+  .typing { display: inline-flex; gap: 4px; padding: 4px 2px; }
+  .typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--text-soft); animation: blink 1.2s infinite; }
+  .typing i:nth-child(2) { animation-delay: .2s; } .typing i:nth-child(3) { animation-delay: .4s; }
+  @keyframes blink { 0%, 80%, 100% { opacity: .2; } 40% { opacity: 1; } }
+  .thinking { font-size: 12px; color: var(--text-muted); margin-left: 4px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 2px 0 6px; }
+  .chip {
+    background: var(--surface-lo); border: 1px solid var(--border-hi); color: var(--text);
+    border-radius: 999px; padding: 7px 13px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+
+  form {
+    position: sticky; bottom: 0; z-index: 5;
+    padding: 10px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: rgba(7, 9, 14, 0.85); backdrop-filter: blur(12px); border-top: 1px solid var(--border);
+  }
+  .row { max-width: 640px; margin: 0 auto; display: flex; gap: 8px; }
+  input {
+    flex: 1; min-width: 0; font: inherit; color: var(--text);
+    background: var(--surface); border: 1px solid var(--border-hi); border-radius: 999px; padding: 12px 16px; outline: none;
+  }
+  input:focus { border-color: var(--accent); }
+  button.send {
+    background: var(--accent); color: #0a0a0a; border: 0; border-radius: 999px; padding: 0 18px;
+    font-family: "Barlow Condensed", Inter, sans-serif; font-weight: 900; font-size: 18px; letter-spacing: .5px; cursor: pointer;
+  }
+  button.send:disabled { opacity: .4; cursor: default; }
+  .disclaimer { max-width: 640px; margin: 8px auto 0; font-size: 11px; color: var(--text-muted); text-align: center; }
+</style>
+</head>
+<body>
+<header>
+  <div class="avatar">A</div>
+  <div>
+    <h1>Antonin<span>GPT</span></h1>
+    <div class="status"><span class="dot"></span> En ligne (le vrai, non)</div>
+  </div>
+  <div class="model"><b>Modèle</b>antonin-1.0-repos<br>Contexte : 1 verre</div>
+</header>
+
+<main id="chat"></main>
+
+<form id="form" autocomplete="off">
+  <div class="row">
+    <input id="input" type="text" placeholder="Dis-moi où tu as mal…" maxlength="140" />
+    <button class="send" id="send" type="submit">Envoyer</button>
+  </div>
+  <div class="disclaimer">AntoninGPT n'est pas kiné. Antonin, lui, oui — et il revient bientôt. En attendant : buvez avec modération, courez avec passion.</div>
+</form>
+
+<script>
+// ─── Base de connaissances (strictement scientifique, évidemment) ───────────
+const KB = [
+  { zone: "genou", keys: ["genou", "genoux", "rotule", "patell", "menisque", "ménisque"],
+    exos: [
+      { t: "Step-down excentrique sur marche", d: "3 × 10 par jambe, descente en 3 secondes", w: "On contrôle la descente. Comme dans les descentes du CCC, mais sans crier." },
+      { t: "Wall sit (chaise contre le mur)", d: "3 × 45 s, cuisses parallèles au sol", w: "Ça brûle, c'est normal. Si ça ne brûle pas, tu es assis sur une vraie chaise." },
+      { t: "Squat bulgare", d: "3 × 8 par jambe, pied arrière sur un banc", w: "Le quadri protège le genou. Le quadri, c'est ton ami. Ton seul ami à ce stade de la sortie." },
+    ]},
+  { zone: "cheville", keys: ["cheville", "chevilles", "entorse", "malléole", "malleole"],
+    exos: [
+      { t: "Équilibre unipodal yeux fermés", d: "3 × 30 s par pied, sur coussin si tu te sens d'attaque", w: "La proprioception, c'est ce qui manque à ta cheville depuis la racine du kilomètre 12." },
+      { t: "Alphabet avec le pied", d: "2 fois l'alphabet complet, en majuscules", w: "Tu peux aussi écrire « je ferai attention aux cailloux ». Ça compte." },
+    ]},
+  { zone: "mollet", keys: ["mollet", "mollets", "jumeau", "soléaire", "soleaire"],
+    exos: [
+      { t: "Monter sur pointe de pied sur marche", d: "3 × 15, descente lente sous le niveau de la marche", w: "Oui, c'est l'exercice du player de séance. Non, ce n'est pas une coïncidence." },
+      { t: "Soléaire genou fléchi", d: "3 × 12, assis, charge sur les genoux", w: "Le soléaire fait 60 % du boulot en montée et 0 % de ta considération. Réparons ça." },
+    ]},
+  { zone: "tendon d'Achille", keys: ["achille", "tendon"],
+    exos: [
+      { t: "Protocole Alfredson (excentrique lent)", d: "3 × 15, genou tendu puis genou fléchi, 2 fois par jour", w: "Le seul protocole au monde nommé d'après un mec qui voulait se rompre le tendon pour se faire opérer. Il a échoué. Il a inventé la kiné du tendon." },
+      { t: "Isométrie sur pointe de pied", d: "5 × 45 s, tenir haut, respirer", w: "L'isométrie calme la douleur. Le vin aussi, mais on arrive à ça." },
+    ]},
+  { zone: "tibia", keys: ["tibia", "périostite", "periostite", "shin"],
+    exos: [
+      { t: "Marche sur talons", d: "3 × 40 m, orteils vers le ciel", w: "Tu auras l'air ridicule. Tout le monde a l'air ridicule. C'est la beauté du trail." },
+      { t: "Releveurs avec élastique", d: "3 × 20 par pied", w: "Le tibial antérieur, ce muscle dont tu ignorais l'existence jusqu'à ce qu'il se venge." },
+    ]},
+  { zone: "pied", keys: ["pied", "pieds", "voûte", "voute", "aponévrose", "aponevrose", "plantaire", "talon", "orteil", "ampoule"],
+    exos: [
+      { t: "Balle sous la voûte plantaire", d: "2 min par pied, balle de tennis ou de golf pour les héros", w: "Ça fait mal ? C'est que ça marche. Ça ne fait pas mal ? Prends la balle de golf." },
+      { t: "Short foot (pied court)", d: "3 × 10 contractions de 5 s, orteils à plat", w: "Tu rapproches l'avant-pied du talon sans plier les orteils. Personne n'y arrive la première fois. Personne." },
+    ]},
+  { zone: "hanche", keys: ["hanche", "hanches", "tfl", "bandelette", "ilio", "fessier", "fessiers", "fesse", "psoas", "aine"],
+    exos: [
+      { t: "Clam shell avec élastique", d: "3 × 15 par côté, bassin immobile", w: "Le moyen fessier : petit muscle, gros caractère. Si ta bandelette tire, c'est lui qui fait grève." },
+      { t: "Pont fessier une jambe", d: "3 × 12 par jambe, tenir 2 s en haut", w: "Serre les fesses. C'est un conseil kiné et un conseil de vie." },
+      { t: "Fente arrière + rotation", d: "3 × 10 par côté, lent", w: "Le psoas d'un coureur qui travaille assis 9 h par jour est plus court que sa liste de courses." },
+    ]},
+  { zone: "ischios", keys: ["ischio", "ischios", "arrière de la cuisse", "arriere de la cuisse", "cuisse arrière"],
+    exos: [
+      { t: "Nordic hamstring", d: "3 × 5, descente la plus lente possible, mains prêtes", w: "L'exercice préféré de personne. Efficace comme une côte à 25 %." },
+      { t: "Pont fessier pieds sur chaise", d: "3 × 12, talons qui poussent", w: "Ischios longs et forts. Comme la liste des excuses pour rater le renfo." },
+    ]},
+  { zone: "quadriceps", keys: ["quadri", "cuisse", "cuisses", "courbature"],
+    exos: [
+      { t: "Descente de marche en contrôle", d: "3 × 12 par jambe, 4 s à la descente", w: "Les courbatures de descente sont une preuve que tu as fait la descente. Bravo. Recommence." },
+      { t: "Fente marchée", d: "3 × 20 m, buste droit", w: "Les quadris qui pleurent le lundi sont les quadris qui tiennent le samedi." },
+    ]},
+  { zone: "dos", keys: ["dos", "lombaire", "lombaires", "rein", "reins", "sacro", "bas du dos"],
+    exos: [
+      { t: "Bird-dog", d: "3 × 10 par côté, 3 s de tenue, bassin de marbre", w: "Bras et jambe opposés. Si tu tombes, c'est le gainage qui parle. Écoute-le." },
+      { t: "Dead bug", d: "3 × 12, lombaires collées au sol", w: "Il s'appelle « insecte mort ». C'est exactement ta posture au ravito du km 60." },
+    ]},
+  { zone: "épaule", keys: ["épaule", "epaule", "épaules", "epaules", "bâton", "baton", "bâtons", "batons", "sac"],
+    exos: [
+      { t: "Rotation externe avec élastique", d: "3 × 15 par bras, coude collé", w: "Deux jours de bâtons et l'épaule découvre qu'elle sert à autre chose qu'à porter le sac." },
+      { t: "Face pull", d: "3 × 15, élastique à hauteur du visage", w: "Ouvre la cage. Respire. Regarde le paysage, tu l'as payé cher." },
+    ]},
+  { zone: "coude", keys: ["coude", "coudes", "bras", "poignet", "main", "mains"],
+    exos: [
+      { t: "Renforcement des extenseurs du poignet", d: "3 × 15 avec une bouteille (pleine, tant qu'à faire)", w: "Une douleur au bras chez un coureur, c'est soit les bâtons, soit le tire-bouchon. Dans les deux cas, on renforce." },
+    ]},
+  { zone: "cou", keys: ["cou", "nuque", "cervical", "cervicales", "trapèze", "trapeze"],
+    exos: [
+      { t: "Rétraction cervicale (double menton)", d: "3 × 10, tenir 5 s", w: "Tu fais un double menton volontaire. Oui. C'est de la science." },
+      { t: "Étirement trapèze supérieur", d: "3 × 30 s par côté, épaule opposée basse", w: "Les trapèzes remontent quand on stresse, quand on porte le sac et quand on regarde le dénivelé restant." },
+    ]},
+  { zone: "tête", keys: ["tête", "tete", "crâne", "crane", "migraine", "gueule de bois", "mal de tête", "cerveau"],
+    exos: [
+      { t: "Hydratation active", d: "1 grand verre d'eau, puis un autre, puis on discute", w: "Le mal de tête du coureur, c'est 80 % de déshydratation et 20 % de la conversation d'hier soir." },
+    ]},
+  { zone: "partout", keys: ["partout", "tout", "entier", "corps", "tout le corps", "de partout", "jambes", "jambe"],
+    exos: [
+      { t: "Jambes au mur", d: "10 min, allongé, jambes à la verticale contre un mur", w: "Le seul exercice où ne rien faire est la consigne. Profites-en, ça n'arrivera plus." },
+      { t: "Marche lente 20 min", d: "20 min, sans montre, sans Strava", w: "Sans Strava, ça a quand même existé. Promis." },
+    ]},
+  { zone: "nulle part", keys: ["nulle part", "rien", "bien", "forme", "super", "ça va", "ca va", "aucune", "pas mal"],
+    exos: [
+      { t: "Suspicion", d: "Vérifier immédiatement : as-tu couru cette semaine ?", w: "Un coureur de la team 0 to 100 qui n'a mal nulle part, c'est soit un mensonge, soit une semaine de repos. Les deux sont suspects." },
+    ]},
+  { zone: "cœur", keys: ["coeur", "cœur", "moral", "motivation", "âme", "ame", "ego", "fierté"],
+    exos: [
+      { t: "Relire le message du groupe WhatsApp", d: "1 fois, du début", w: "Rappel : vous êtes 30 à avoir dit oui à ça. Si ça, c'est pas une blessure collective." },
+    ]},
+];
+
+const VINS = [
+  { t: "Morgon (Beaujolais)", w: "Léger, fruité, tout en gamay. Comme ta foulée devrait l'être." },
+  { t: "Crozes-Hermitage", w: "De la syrah des pentes. Elle connaît le dénivelé, elle." },
+  { t: "Chinon (Loire)", w: "Cabernet franc, un peu de poivron. Antonin dirait « anti-inflammatoire ». Antonin n'est pas là." },
+  { t: "Saint-Joseph", w: "Un vin de côte. La côte, tu connais." },
+  { t: "Bourgogne aligoté", w: "Vif, minéral, sans prétention. Le vin idéal pour quelqu'un qui a fait 40 km et 2 000 m de D+ et qui « n'a pas trop forcé »." },
+  { t: "Arbois (Jura)", w: "Un poulsard, léger, presque une tisane. C'est le vin de récupération officiel de la Rosière. On l'affirme." },
+  { t: "Côtes-du-Rhône villages", w: "Chaleureux, généreux, comme un ravito à Champex-Lac." },
+  { t: "Mondeuse de Savoie", w: "Le cépage du massif. Boire local, c'est aussi de la préparation UTMB." },
+  { t: "Champagne", w: "Réservé aux blessures de plus de 3 semaines. Ou aux finishers. Ou aux mardis." },
+  { t: "Verre d'eau gazeuse", w: "Antonin surveille peut-être ce chat. On ne sait jamais." },
+  { t: "Gigondas", w: "Un vin qui tient les jambes. Enfin, qui les fait tenir. Enfin, qui fait qu'on ne sent plus qu'elles ne tiennent pas." },
+  { t: "Sancerre rouge", w: "Un pinot noir fin et discret. Comme la douleur au genou droit dont tu ne parles à personne." },
+];
+
+const HELLO = [
+  "Salut. Antonin s'est accordé quelques jours de repos (oui, lui aussi a le droit). En attendant, c'est moi qui prends le relais.",
+  "Dis-moi où tu as mal. Je te donne <b>un</b> exercice et <b>un</b> vin. Un seul de chaque : la modération, c'est la clé de la progression.",
+];
+
+const THINKING = [
+  "Palpation virtuelle…", "Consultation du carnet Nolio…", "Vérification de la cave…",
+  "Décantation du diagnostic…", "Recherche dans les protocoles (et les millésimes)…",
+  "Analyse de la foulée sur Strava…", "Regard désapprobateur sur tes chaussures…",
+];
+
+const FOOT = [
+  "Si la douleur persiste plus de 72 h ou après 2 verres, consulter un vrai Antonin.",
+  "Ne pas dépasser la dose prescrite. Pour l'exercice, on peut négocier.",
+  "Généré automatiquement. Antonin décline toute responsabilité, et il n'est même pas au courant.",
+  "Le vin ne remplace pas la kiné. La kiné ne remplace pas le vin. Équilibre.",
+];
+
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+
+function findZone(text) {
+  const t = norm(text);
+  let best = null, bestLen = 0;
+  for (const z of KB) for (const k of z.keys) {
+    const nk = norm(k);
+    const re = new RegExp("(^|[^a-z])" + nk.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(?![a-z])");
+    if (re.test(t) && nk.length > bestLen) { best = z; bestLen = nk.length; }
+  }
+  return best;
+}
+
+// ─── UI ──────────────────────────────────────────────────────────────────────
+const chat = document.getElementById("chat");
+const form = document.getElementById("form");
+const input = document.getElementById("input");
+const send = document.getElementById("send");
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const scroll = () => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+
+function add(role, html) {
+  const el = document.createElement("div");
+  el.className = "msg " + role;
+  el.innerHTML = (role === "bot" ? '<div class="avatar small">A</div>' : "") + '<div class="bubble">' + html + "</div>";
+  chat.appendChild(el);
+  scroll();
+  return el;
+}
+
+async function botSay(html, delay = 900) {
+  const t = add("bot", '<span class="typing"><i></i><i></i><i></i></span><span class="thinking">' + pick(THINKING) + "</span>");
+  await wait(delay);
+  t.querySelector(".bubble").innerHTML = html;
+  scroll();
+}
+
+function chips(zones) {
+  const el = document.createElement("div");
+  el.className = "chips";
+  for (const z of zones) {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.textContent = z;
+    b.onclick = () => { el.remove(); ask(z); };
+    el.appendChild(b);
+  }
+  chat.appendChild(el);
+  scroll();
+}
+
+function prescription(zone) {
+  const e = pick(zone.exos), v = pick(VINS);
+  return `<p>OK, ${zone.zone === "nulle part" ? "« nulle part »" : "le " + zone.zone}. Je vois. Je vois très bien.</p>
+    <div class="card exo"><div class="label">Exercice</div><div class="title">${e.t}</div><div class="dose">${e.d}</div><div class="why">${e.w}</div></div>
+    <div class="card vin"><div class="label">Accord vin</div><div class="title">${v.t}</div><div class="why">${v.w}</div></div>
+    <div class="foot">${pick(FOOT)}</div>`;
+}
+
+let busy = false;
+async function ask(text) {
+  if (busy || !text.trim()) return;
+  busy = true; send.disabled = true;
+  document.querySelectorAll(".chips").forEach(c => c.remove());
+  add("user", text.replace(/[<>&]/g, c => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" }[c])));
+  const zone = findZone(text);
+  if (zone) {
+    await botSay(prescription(zone), 1400 + Math.random() * 900);
+  } else {
+    await botSay("<p>Hmm. Je ne localise pas. Antonin aurait mis la main dessus tout de suite, mais moi je n'ai pas de mains.</p><p>C'est plutôt où ?</p>", 1100);
+    chips(["Genou", "Cheville", "Mollet", "Tendon d'Achille", "Tibia", "Pied", "Hanche / TFL", "Ischios", "Quadriceps", "Dos", "Épaule", "Nuque", "Partout", "Nulle part"]);
+  }
+  busy = false; send.disabled = false;
+  input.focus();
+}
+
+form.addEventListener("submit", e => { e.preventDefault(); const v = input.value; input.value = ""; ask(v); });
+
+(async () => {
+  await botSay(HELLO[0], 700);
+  await botSay(HELLO[1], 1100);
+  chips(["Genou", "Mollet", "Tendon d'Achille", "Dos", "Partout", "Nulle part"]);
+})();
+</script>
+</body>
+</html>
