@@ -112,7 +112,7 @@
   .chip:hover { border-color: var(--accent); color: var(--accent); }
 
   form {
-    position: sticky; bottom: 0; z-index: 5;
+    position: sticky; bottom: var(--hub-nav-h, 0px); z-index: 5; /* au-dessus de la barre du hub */
     padding: 10px 16px calc(12px + env(safe-area-inset-bottom, 0px));
     background: rgba(7, 9, 14, 0.85); backdrop-filter: blur(12px); border-top: 1px solid var(--border);
   }
@@ -355,5 +355,7 @@ form.addEventListener("submit", e => { e.preventDefault(); const v = input.value
   chips(["Genou", "Mollet", "Tendon d'Achille", "Dos", "Partout", "Nulle part"]);
 })();
 </script>
+<!-- Barre d'onglets partagée de la team (hub) -->
+<script src="https://cds-fleurier.github.io/0to100-hub/nav.js" defer></script>
 </body>
 </html>
