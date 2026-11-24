@@ -63,3 +63,6 @@ AntoninGPT n'est pas kiné. Antonin, lui, oui. Et il revient bientôt.
   pas d'exercice, pas de vin, pas de blague : médecin sans attendre, 15 / 112 si intense. « Mal au cœur » = nausée → ventre.
 - Bug corrigé : « œ » n'était pas normalisé (« cœur » jamais reconnu).
 - Test : `agpt-body.cjs` (117 parties) + test des puces + phrases réelles.
+
+## v2.4 (24/11/2026)
+- Zone intime : abréviations et argot (clito/clit, teub, zob, burnes, valseuses…), zone anale, règles, organes génitaux → médecin. Argot seins → côtes/brassière ; « mal au cul / au derrière » → fesses. Les tests (117 parties + puces) passent toujours.
