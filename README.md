@@ -50,3 +50,6 @@ AntoninGPT n'est pas kiné. Antonin, lui, oui. Et il revient bientôt.
 - Plus aucun vrai diagnostic : carte « L'avis d'AntoninGPT (zéro diplôme) » = surnom drôle + « suspects habituels », jamais d'affirmation.
 - Renvoi systématique vers le vrai Antonin dans chaque réponse (carte en pointillés), en plus des signaux d'alerte (gonflement, « crac », nuit).
 - 37 vins (12 avant), dont le parcours CCC : Blanc de Morgex et de La Salle, Torrette, Fumin, Petite Arvine, Fendant, Cornalin, Savoie ; + options sans alcool.
+
+## v2.2 (24/11/2026)
+- Zone intime prévue (vulve, « chatte », testicules, périnée…) : AntoninGPT rougit, blague vétérinaire si « chatte/minou », seul conseil utile = anti-frottement, renvoi médecin / gynéco / urologue (pas Antonin). Pas de vulgarité. « queue » et « lèvres » seuls exclus (queue de cheval = nerfs du bas du dos ; lèvres = bouche).

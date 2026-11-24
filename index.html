@@ -422,6 +422,15 @@ const KB = [
       { t: "Ravito testé", d: "Ne rien manger le jour J que tu n'aies déjà testé", w: "La soupe de Champex à 23 h, tu l'as testée ? Non ? Alors pense-y." },
     ]},
 
+  // ── Zone intime (on sait que quelqu'un va tester) ──
+  { zone: "la zone intime", intimate: true,
+    keys: ["vulve", "vagin", "chatte", "foufoune", "minou", "zezette", "sexe", "parties intimes", "parties", "clitoris", "grandes levres", "petites levres",
+           "testicule", "testicules", "couilles", "bourses", "penis", "bite", "zizi", "scrotum", "perinee", "entre les jambes"],
+    diag: { t: "Hors de ma juridiction", w: "AntoninGPT rougit, toussote et regarde ses chaussures. Ce territoire n'est ni dans ses compétences, ni dans celles d'Antonin, qui soigne des genoux et des tendons." },
+    exos: [
+      { t: "Cuissard sans couture", d: "1 cuissard long, coutures plates, jamais de coton", w: "Le seul conseil sérieux du jour : en trail, ce sont les frottements qui attaquent. Chamois, crème anti-frottement, et on n'en parle plus au ravito." },
+      { t: "Crème anti-frottement", d: "Une noisette, généreusement, avant chaque sortie longue", w: "Les cyclistes l'appellent « crème de chamois ». Les traileurs l'appellent « la crème dont on ne parle pas »." },
+    ]},
   // ── Le reste du corps (et de l'âme) ──
   { zone: "la tête", keys: ["tete", "crane", "migraine", "gueule de bois", "mal de tete", "cerveau"],
     diag: { t: "La tête du lendemain", w: "80 % de déshydratation, 20 % de la conversation d'hier soir. Une vraie migraine qui ne passe pas, c'est un médecin, pas un chat." },
@@ -624,7 +633,25 @@ function subChips(region) {
   return KB.filter(z => z.region === region).map(z => [z.zone.replace(/^(le |la |les |l')/, "").replace(/^./, c => c.toUpperCase()), z.zone]);
 }
 
-function prescription(zone, ctx) {
+const INTIME_VINS = [
+  { t: "Tisane camomille", w: "Apaisante. Pour toi, et surtout pour AntoninGPT, qui ne s'en remet pas." },
+  { t: "Rosé de Provence", w: "La couleur de mes joues en ce moment." },
+  { t: "Verre d'eau fraîche", w: "Il y a des situations où même AntoninGPT ne propose pas de vin. Celle-ci en fait partie (presque)." },
+];
+
+function intimate(text) {
+  const cat = /(^|[^a-z])(chatte|minou)(?![a-z])/.test(norm(text));
+  const e = pick(KB.find(z => z.intimate).exos), v = pick(INTIME_VINS);
+  return `<p>…</p><p>Ah. D'accord. Je… d'accord.${cat ? " Si tu parles de ta chatte à quatre pattes, c'est un vétérinaire qu'il te faut. Sinon, lis la suite." : ""}</p>
+    <div class="card diag"><div class="label">L'avis d'AntoninGPT (zéro diplôme)</div><div class="title">Hors de ma juridiction</div><div class="why">AntoninGPT rougit, toussote et regarde ses chaussures. Ce territoire n'est ni dans ses compétences, ni dans celles d'Antonin, qui soigne des genoux et des tendons.</div></div>
+    <div class="card exo"><div class="label">Le seul conseil utile</div><div class="title">${e.t}</div><div class="dose">${e.d}</div><div class="why">${e.w}</div></div>
+    <div class="card vin"><div class="label">Accord boisson</div><div class="title">${v.t}</div><div class="why">${v.w}</div></div>
+    <div class="card antonin"><b>Une vraie douleur à cet endroit, ça ne se règle pas dans un chat : médecin, gynéco ou urologue.</b> Pas Antonin (il est kiné, et il est en vacances), et surtout pas moi.</div>
+    <div class="foot">AntoninGPT va maintenant s'allonger cinq minutes.</div>`;
+}
+
+function prescription(zone, ctx, text) {
+  if (zone.intimate) return intimate(text || "");
   const e = pick(zone.exos), v = pick(VINS);
   const precis = ctx.filter(c => c.txt).map(c => c.txt);
   const quip = ctx.find(c => c.quip);
@@ -652,7 +679,7 @@ async function ask(text, shown) {
     await botSay(`<p>${REGIONS[found.region].ask}</p>`, 1000);
     chips(subChips(found.region));
   } else if (found) {
-    await botSay(prescription(found.zone, ctx.length ? ctx : (shown ? lastCtx : [])), 1400 + Math.random() * 900);
+    await botSay(prescription(found.zone, ctx.length ? ctx : (shown ? lastCtx : []), text), found.zone.intimate ? 2600 : 1400 + Math.random() * 900);
     lastCtx = [];
   } else {
     await botSay("<p>Hmm. Je ne localise pas. Antonin aurait mis la main dessus tout de suite, mais moi je n'ai pas de mains.</p><p>C'est plutôt où ?</p>", 1100);
