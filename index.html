@@ -90,6 +90,8 @@
   .card.vin { background: var(--wine-soft); border-color: rgba(168,50,79,0.5); }
   .card.diag { background: var(--surface-lo); }
   .card.diag .title { font-size: 19px; }
+  .card.antonin { background: transparent; border-style: dashed; font-size: 13px; color: var(--text-soft); }
+  .card.antonin b { color: var(--text); }
   .card .label {
     font-family: "Barlow Condensed", Inter, sans-serif; font-weight: 700; font-size: 13px;
     letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-soft); margin-bottom: 4px;
@@ -162,43 +164,43 @@
 //   keys : expressions qui la désignent. Une chaîne = expression exacte ; un tableau = tous ces mots
 //          présents dans la phrase (« genou » + « exterieur »). Pluriels en s/x acceptés.
 //   region : quand on ne cite que la région (« genou »), AntoninGPT demande de préciser (REGIONS).
-//   diag : le « diagnostic » (nom réel de la structure / du syndrome classique du coureur).
+//   diag : « l'avis d'AntoninGPT » — surnom drôle + suspects anatomiques, JAMAIS un vrai diagnostic (demande de Charles, 24/11).
 const KB = [
   // ── Genou ──
   { region: "genou", zone: "le devant du genou", keys: ["rotule", "patella", "femoro-patellaire", "syndrome rotulien", ["genou", "devant"], ["genou", "avant"], "autour de la rotule"],
-    diag: { t: "Syndrome fémoro-patellaire", w: "La rotule glisse mal dans sa gouttière du fémur. Le « genou du coureur », le vrai, celui des descentes et des escaliers de bureau." },
+    diag: { t: "Le genou du descendeur", w: "Suspect habituel : la rotule, qui aime glisser bien droit dans son rail. Les descentes et les escaliers de bureau la mettent de mauvaise humeur. Hypothèse, pas verdict." },
     exos: [
       { t: "Step-down excentrique", d: "3 × 10 par jambe, descente en 3 s, genou dans l'axe du 2e orteil", w: "Si ton genou part vers l'intérieur, c'est ton moyen fessier qui a démissionné. On le rappelle au travail." },
       { t: "Wall sit à 60°", d: "5 × 45 s, pas plus bas que 60° de flexion", w: "L'isométrie calme la rotule. Ta rotule mérite le calme. Toi aussi." },
       { t: "Clam shell + élastique", d: "3 × 15 par côté", w: "On soigne le genou par la hanche. Oui, la kiné, c'est souvent « le problème est ailleurs »." },
     ]},
   { region: "genou", zone: "le dessous de la rotule", keys: ["tendon rotulien", "tendon patellaire", "tendinite rotulienne", "sous la rotule", "dessous de la rotule", "pointe de la rotule", ["genou", "dessous"]],
-    diag: { t: "Tendinopathie rotulienne", w: "Le « genou du sauteur » : le tendon entre la rotule et le tibia encaisse chaque réception. En trail, chaque marche de descente est une réception." },
+    diag: { t: "Le genou trampoline", w: "Juste sous la rotule passe un tendon qui encaisse chaque marche de descente. Il a peut-être envie qu'on parle de lui. Ou pas. Je n'ai pas de mains pour vérifier." },
     exos: [
       { t: "Squat sur plan incliné (decline squat)", d: "3 × 15, talons surélevés, descente lente", w: "Le protocole classique du tendon rotulien. Une planche, deux livres sous les talons, et ta dignité." },
       { t: "Isométrie à la presse… ou au mur", d: "5 × 45 s à 70 % de ton effort max", w: "Un tendon qui fait mal aime l'isométrie. Comme toi, il préfère ne pas bouger." },
     ]},
   { region: "genou", zone: "l'extérieur du genou", keys: ["bandelette", "tfl", "ilio-tibial", "ilio tibial", "essuie-glace", "essuie glace", ["genou", "exterieur"], ["genou", "externe"], ["genou", "cote exterieur"]],
-    diag: { t: "Syndrome de la bandelette ilio-tibiale", w: "La bandelette frotte sur le condyle externe du fémur, vers 30° de flexion. Elle prévient au km 8, elle crie au km 12, elle gagne au km 15." },
+    diag: { t: "Le genou essuie-glace", w: "Les traileurs accusent souvent la bandelette, une longue bande qui descend de la hanche. Elle prévient au km 8, crie au km 12, gagne au km 15. Enfin, c'est ce qu'on raconte au ravito." },
     exos: [
       { t: "Abduction de hanche couché sur le côté", d: "3 × 15, jambe tendue légèrement en arrière, pointe de pied vers le sol", w: "Le moyen fessier stabilise le bassin. Bassin stable, bandelette calme." },
       { t: "Pont fessier une jambe", d: "3 × 12 par jambe, bassin bien horizontal", w: "Si le bassin penche, c'est la preuve. Recommence." },
       { t: "Rouleau sur le TFL (pas sur la bandelette)", d: "1 min par côté, sur le muscle à l'avant de la hanche", w: "Rouler la bandelette elle-même ne l'allonge pas : c'est du tissu fibreux. Tu souffrais pour rien. Maintenant tu sais." },
     ]},
   { region: "genou", zone: "l'intérieur du genou", keys: ["patte d'oie", "patte d oie", "ligament interne", "ligament collateral medial", ["genou", "interieur"], ["genou", "interne"]],
-    diag: { t: "Tendinopathie de la patte d'oie", w: "Trois tendons (couturier, gracile, semi-tendineux) se rejoignent sous le genou, côté intérieur. Ensemble, ils forment une patte d'oie. Ensemble, ils te font mal." },
+    diag: { t: "La patte d'oie (oui, c'est son vrai nom)", w: "Trois tendons se rejoignent côté intérieur du genou et forment une « patte d'oie ». C'est l'anatomie la plus poétique du corps. Pas forcément la coupable." },
     exos: [
       { t: "Adducteurs en Copenhague (version facile)", d: "3 × 20 s par côté, genou posé sur un banc", w: "Les adducteurs, tes muscles de l'intérieur de cuisse, jusqu'ici réservés au ski." },
       { t: "Leg curl à l'élastique", d: "3 × 15 par jambe", w: "On renforce le semi-tendineux, membre fondateur de la patte d'oie." },
     ]},
   { region: "genou", zone: "le ménisque", keys: ["menisque", "meniscal", "genou qui se bloque", "genou bloque", "craquement genou"],
-    diag: { t: "Souffrance méniscale", w: "Les ménisques sont deux amortisseurs en croissant entre fémur et tibia. Ils n'aiment ni les rotations en charge, ni les squats de boîte de nuit. Genou qui se bloque ou gonfle : ça, c'est pour le vrai Antonin." },
+    diag: { t: "Le genou qui grince", w: "Le ménisque est un amortisseur en forme de croissant. Je ne sais pas s'il est en cause, et franchement personne ne le sait sans examiner. Antonin, lui, sait." },
     exos: [
       { t: "Vélo sans résistance", d: "15 min, cadence tranquille", w: "Le cartilage se nourrit du mouvement. Pédale, c'est un repas." },
       { t: "Contractions statiques du quadriceps", d: "3 × 10 × 10 s, genou tendu, rotule qui remonte", w: "Le vaste médial, ce muscle en goutte d'eau au-dessus du genou, protège l'articulation. Fais-le apparaître." },
     ]},
   { region: "genou", zone: "l'arrière du genou", keys: ["creux poplite", "poplite", "kyste de baker", "baker", "derriere le genou", ["genou", "derriere"], ["genou", "arriere"]],
-    diag: { t: "Tendinopathie du poplité (ou kyste de Baker)", w: "Le poplité est un petit muscle caché derrière le genou qui déverrouille l'articulation. Il travaille surtout en descente, quand tu freines. Donc tout le temps." },
+    diag: { t: "Le creux mystère", w: "Derrière le genou, il y a un petit muscle caché, des tendons, des vaisseaux. C'est le quartier le plus fréquenté de la jambe. Impossible de dire qui fait du bruit." },
     exos: [
       { t: "Étirement mollet genou tendu", d: "3 × 30 s par jambe", w: "Derrière le genou, il y a aussi le haut des jumeaux. Ils s'attachent là, ils tirent là." },
       { t: "Pont fessier talons loin", d: "3 × 10", w: "Ischios et poplité au travail, sans impact. Un luxe." },
@@ -206,19 +208,19 @@ const KB = [
 
   // ── Cheville ──
   { region: "cheville", zone: "l'extérieur de la cheville", keys: ["entorse", "ligament", "faux pas", "tordu la cheville", "pied tourne", "malleole externe", ["cheville", "exterieur"], ["cheville", "externe"]],
-    diag: { t: "Entorse du ligament talo-fibulaire antérieur", w: "Le plus souvent blessé du corps humain. Un caillou, une racine, un regard vers le Mont-Blanc au mauvais moment, et le pied part en dedans." },
+    diag: { t: "La cheville qui a vu un caillou", w: "Un caillou, une racine, un regard vers le Mont-Blanc au mauvais moment. Les ligaments extérieurs ont l'habitude d'encaisser. Si ça gonfle ou si tu ne peux pas poser le pied : Antonin." },
     exos: [
       { t: "Équilibre unipodal yeux fermés", d: "3 × 30 s par pied, puis sur coussin", w: "La proprioception : ta cheville doit réapprendre à savoir où elle est sans regarder. Comme toi au km 60." },
       { t: "Éversion avec élastique", d: "3 × 15, pied qui pousse vers l'extérieur", w: "Les muscles fibulaires sont les gardes du corps de ta cheville. Ils dormaient pendant l'entorse." },
     ]},
   { region: "cheville", zone: "les tendons fibulaires", keys: ["fibulaire", "peronier", "peroniers", "derriere la malleole externe"],
-    diag: { t: "Tendinopathie des fibulaires", w: "Deux tendons passent derrière la malléole externe comme une corde dans une poulie. Les dévers en trail les font travailler double." },
+    diag: { t: "Les cordes du dévers", w: "Deux tendons passent derrière la malléole externe comme une corde dans une poulie. Les sentiers en dévers les font travailler. Peut-être eux. Peut-être pas." },
     exos: [
       { t: "Éversion lente avec élastique", d: "3 × 15, 3 s par répétition", w: "Lent. Plus lent. Encore plus lent. Voilà." },
       { t: "Marche sur le bord interne du pied", d: "3 × 20 m", w: "Tu auras l'air de chercher tes clés. C'est parfait." },
     ]},
   { region: "cheville", zone: "l'intérieur de la cheville", keys: ["tibial posterieur", "malleole interne", ["cheville", "interieur"], ["cheville", "interne"], "pied plat"],
-    diag: { t: "Tendinopathie du tibial postérieur", w: "Il soutient ta voûte plantaire de l'intérieur. Quand il fatigue, la voûte s'affaisse et il s'en plaint en passant sous la malléole interne." },
+    diag: { t: "La voûte qui s'affaisse", w: "Côté intérieur, un tendon aide à tenir la voûte du pied. Quand on fatigue, tout le monde s'affaisse un peu. Lui aussi." },
     exos: [
       { t: "Montée sur pointe, balle entre les talons", d: "3 × 12, talons serrés sur la balle", w: "La balle oblige le talon à basculer vers l'extérieur : le tibial postérieur bosse." },
       { t: "Short foot", d: "3 × 10 × 5 s", w: "Tu creuses la voûte sans plier les orteils. Personne n'y arrive la première fois. Personne." },
@@ -226,31 +228,31 @@ const KB = [
 
   // ── Pied ──
   { region: "pied", zone: "le talon et la voûte plantaire", keys: ["aponevrose", "fasciite", "plantaire", "talon", "voute", "dessous du pied", "sous le pied", "epine calcaneenne"],
-    diag: { t: "Aponévrosite plantaire", w: "L'aponévrose est une toile fibreuse tendue du talon aux orteils. Signature : les premiers pas du matin font très mal, puis ça « se chauffe ». Ne te fie pas à ce mensonge." },
+    diag: { t: "Le pied du matin", w: "Les premiers pas du réveil qui piquent sous le talon : un grand classique des coureurs. Le classique a souvent un nom compliqué. Antonin le prononcera mieux que moi." },
     exos: [
       { t: "Protocole de Rathleff", d: "3 × 12 montées sur pointe, orteils relevés sur une serviette roulée, tous les 2 jours", w: "3 s en montée, 2 s en haut, 3 s en descente. L'aponévrose se renforce comme un tendon." },
       { t: "Balle sous la voûte", d: "2 min par pied, balle de tennis ou de golf pour les héros", w: "Ça fait mal ? C'est que ça marche. Ça ne fait pas mal ? Prends la balle de golf." },
     ]},
   { region: "pied", zone: "l'avant-pied entre les orteils", keys: ["morton", "nevrome", "entre les orteils", "decharge electrique", "brulure avant du pied", "avant-pied", "avant pied"],
-    diag: { t: "Névrome de Morton", w: "Un nerf pincé entre la tête du 3e et du 4e métatarsien. Sensation de caillou ou de décharge. Souvent : chaussures trop étroites. Toujours : ça gâche la sortie." },
+    diag: { t: "Le caillou fantôme", w: "La sensation d'avoir un caillou dans la chaussure alors qu'il n'y en a pas. Premier suspect : une chaussure trop étroite. Deuxième suspect : à voir avec Antonin." },
     exos: [
       { t: "Délacer l'avant de la chaussure", d: "1 fois, définitivement", w: "Le meilleur exercice est parfois un lacet. On ne va pas te mentir." },
       { t: "Écarter les orteils (toe spread)", d: "3 × 10 × 5 s", w: "Tu essaies d'écarter les orteils comme un éventail. C'est très difficile et très drôle à regarder." },
     ]},
   { region: "pied", zone: "les métatarses", keys: ["metatarse", "metatarsien", "metatarsiens", "dessus du pied", "fracture de fatigue pied", "cou-de-pied", "coup de pied"],
-    diag: { t: "Surcharge métatarsienne", w: "Les os longs du milieu du pied. Douleur précise au doigt sur l'os, qui augmente à chaque sortie : on arrête et on va voir le vrai Antonin, ça peut être une fracture de fatigue." },
+    diag: { t: "Le pied tambour", w: "Les petits os longs du milieu du pied. Une douleur précise sur un os, qui empire à chaque sortie, ce n'est pas un sujet de blague : on arrête de courir et on va voir Antonin." },
     exos: [
       { t: "Repos relatif + vélo", d: "1 à 2 semaines, vélo ou natation à volonté", w: "Le seul exercice de ce chat qui consiste à ne pas courir. Courage." },
       { t: "Lacets moins serrés sur le dessus", d: "Laçage en sautant un œillet au niveau de la douleur", w: "Le dessus du pied qui fait mal, c'est souvent un lacet trop serré. Oui, encore les lacets." },
     ]},
   { region: "pied", zone: "le gros orteil", keys: ["gros orteil", "hallux", "oignon", "orteil", "ongle noir", "ongle", "ongles"],
-    diag: { t: "Hallux et ongle noir du traileur", w: "L'ongle noir est un hématome sous l'ongle : en descente, l'orteil tape le bout de la chaussure 3 000 fois. Il tombera. Il repoussera. Tu recommenceras." },
+    diag: { t: "L'ongle de la honte", w: "En descente, l'orteil tape le bout de la chaussure 3 000 fois. L'ongle devient noir. Il tombera. Il repoussera. Tu recommenceras. C'est le cycle de la vie du traileur." },
     exos: [
       { t: "Laçage « talon verrouillé »", d: "Utilise le dernier œillet pour une boucle de blocage", w: "Le pied ne glisse plus vers l'avant en descente. Ton ongle te remercie d'avance." },
       { t: "Mobilisation du gros orteil", d: "2 × 20 flexions-extensions lentes", w: "Le gros orteil doit plier à 60° pour bien dérouler le pas. Le tien plie à combien ?" },
     ]},
   { region: "pied", zone: "les ampoules", keys: ["ampoule", "ampoules", "cloque", "cloques", "frottement pied"],
-    diag: { t: "Phlyctène de friction", w: "Chaleur + humidité + frottement. Une ampoule, c'est ton pied qui te dit que la chaussette en coton, c'était non." },
+    diag: { t: "La cloque de la vérité", w: "Chaleur + humidité + frottement. Une ampoule, c'est ton pied qui te dit que la chaussette en coton, c'était non." },
     exos: [
       { t: "Chaussettes techniques sans coutures", d: "1 paire, à vie", w: "Laine mérinos ou synthétique. Jamais de coton. Jamais." },
       { t: "Crème anti-frottement avant la sortie", d: "Une noisette par pied", w: "Le nombre de traileurs qui gagnent une course avec les pieds secs est de zéro." },
@@ -258,43 +260,43 @@ const KB = [
 
   // ── Mollet / Achille / tibia ──
   { region: "mollet", zone: "le mollet (jumeaux)", keys: ["jumeau", "jumeaux", "gastrocnemien", "tennis leg", "coup de fouet", "haut du mollet", ["mollet", "haut"]],
-    diag: { t: "Élongation du gastrocnémien médial", w: "Le « coup de fouet » : le jumeau interne lâche sur une relance. On a l'impression d'avoir reçu une pierre dans le mollet. Personne ne t'a lancé de pierre." },
+    diag: { t: "Le mollet caillou", w: "Si tu as eu l'impression de recevoir une pierre dans le mollet sur une relance, personne ne t'a lancé de pierre. Mais ça mérite l'avis d'Antonin avant de recourir." },
     exos: [
       { t: "Montée sur pointe genou tendu", d: "3 × 15, descente lente sous le niveau de la marche", w: "Oui, c'est l'exercice du player de séance. Non, ce n'est pas une coïncidence." },
       { t: "Étirement du jumeau contre un mur", d: "3 × 30 s par jambe, talon au sol, genou tendu", w: "Pas d'étirement fort les premiers jours d'une élongation. Doux. Comme le Morgon." },
     ]},
   { region: "mollet", zone: "le bas du mollet (soléaire)", keys: ["soleaire", "bas du mollet", ["mollet", "bas"], ["mollet", "profond"]],
-    diag: { t: "Surcharge du soléaire", w: "Le soléaire, sous les jumeaux, fait le gros du travail en montée et à allure lente. Il est inépuisable, sauf quand il est épuisé." },
+    diag: { t: "Le moteur de la montée", w: "Sous le mollet visible, il y a le soléaire, qui fait le gros du travail en montée. Il bosse beaucoup et on ne le remercie jamais. Il se venge peut-être." },
     exos: [
       { t: "Montée sur pointe genou fléchi", d: "3 × 12, assis, charge sur les genoux (sac à dos plein)", w: "Le soléaire fait 60 % du boulot en montée et 0 % de ta considération. Réparons ça." },
       { t: "Squat isométrique sur pointe", d: "4 × 30 s", w: "Genoux fléchis, talons décollés. Respire. Le soléaire brûle. C'est lui." },
     ]},
   { region: "mollet", zone: "les crampes", keys: ["crampe", "crampes", "contracture", "tetanise", "durcit"],
-    diag: { t: "Crampe musculaire d'effort", w: "Contrairement à la légende, ce n'est presque jamais le magnésium : c'est surtout la fatigue neuromusculaire. Le muscle a fait plus que ce à quoi tu l'as préparé." },
+    diag: { t: "La crampe du km 30", w: "Contrairement à la légende du ravito, ce n'est presque jamais « le magnésium ». Plutôt un muscle qui a fait plus que ce à quoi tu l'avais préparé." },
     exos: [
       { t: "Étirement doux pendant la crampe", d: "20-30 s, sans forcer", w: "Le muscle antagoniste se contracte, le muscle crampé se calme. Le corps humain est un système de négociation." },
       { t: "Plus de renfo, moins de légendes", d: "2 séances de renfo par semaine pendant 6 semaines", w: "La crampe du km 30 se prévient au km 0, en septembre." },
     ]},
   { region: "achille", zone: "le tendon d'Achille", keys: ["achille", "tendon d'achille", "tendinite achille", "tendon", ["achille", "milieu"]],
-    diag: { t: "Tendinopathie corporéale d'Achille", w: "Le tendon le plus solide du corps : il encaisse 6 à 8 fois ton poids à chaque foulée. Quand il fait mal, il le fait savoir le matin, au premier pas." },
+    diag: { t: "Le tendon du héros grec", w: "Achille est mort d'une flèche au talon. Toi, c'est probablement la sortie de dimanche. Un tendon qui fait mal le matin, ça se montre à Antonin, ça ne se négocie pas." },
     exos: [
       { t: "Protocole Alfredson (excentrique lent)", d: "3 × 15, genou tendu puis genou fléchi, 2 fois par jour", w: "Le seul protocole au monde nommé d'après un mec qui voulait se rompre le tendon pour se faire opérer. Il a échoué. Il a inventé la kiné du tendon." },
       { t: "Isométrie sur pointe de pied", d: "5 × 45 s, tenir haut, respirer", w: "L'isométrie calme la douleur. Le vin aussi, mais on arrive à ça." },
     ]},
   { region: "achille", zone: "l'insertion du tendon d'Achille", keys: ["haglund", "bursite", "insertion", "arriere du talon", "derriere le talon", ["achille", "talon"], ["achille", "bas"]],
-    diag: { t: "Tendinopathie d'insertion (ou maladie de Haglund)", w: "Là où le tendon s'attache au calcanéum, l'os du talon. Particularité : ici, on n'étire pas et on ne descend pas sous le niveau de la marche. L'étirement écrase le tendon contre l'os." },
+    diag: { t: "Le talon grincheux", w: "Derrière le talon, là où le tendon s'accroche à l'os. Les chaussures, les talons qui frottent, les côtes… Beaucoup de suspects, aucun aveu." },
     exos: [
-      { t: "Montée sur pointe au sol (pas sur marche)", d: "3 × 15, amplitude limitée", w: "Pas de talon dans le vide. Le vide, c'est pour le corps du tendon, pas pour son insertion." },
+      { t: "Montée sur pointe au sol (pas sur marche)", d: "3 × 15, amplitude limitée", w: "Pas de talon dans le vide pour celui-là. Antonin t'expliquera pourquoi, il adore ça." },
       { t: "Talonnettes temporaires", d: "5 mm dans les deux chaussures, 2-3 semaines", w: "On soulage la tension sur l'insertion. Petite cale, gros effet." },
     ]},
   { region: "tibia", zone: "le bord interne du tibia", keys: ["periostite", "shin splint", "shin", ["tibia", "interieur"], ["tibia", "interne"], "bord du tibia", "tibia"],
-    diag: { t: "Syndrome de stress tibial médial (périostite)", w: "La membrane qui entoure l'os s'irrite sur le bord interne du tibia, souvent après une hausse brutale du volume. Ton plan d'entraînement est au courant." },
+    diag: { t: "Le tibia qui proteste", w: "Une douleur le long du tibia arrive souvent quand on augmente le volume trop vite. Ton plan d'entraînement est au courant. Si c'est un point précis sur l'os : Antonin, tout de suite." },
     exos: [
       { t: "Montée sur pointe, 3 orientations", d: "3 × 12 pieds droits, rentrés, ouverts", w: "Les mollets absorbent l'impact à la place du tibia. Des mollets forts, un tibia tranquille." },
       { t: "Réduction du volume de 30 %", d: "2 semaines, puis +10 % par semaine", w: "La règle des 10 % n'est pas sexy. Elle fonctionne." },
     ]},
   { region: "tibia", zone: "l'avant de la jambe", keys: ["tibial anterieur", "releveur", "releveurs", "devant de la jambe", "loge anterieure", ["tibia", "devant"], ["tibia", "exterieur"]],
-    diag: { t: "Tendinopathie du tibial antérieur", w: "Le muscle qui relève ton pied à chaque foulée, surtout en descente. Le tibial antérieur, ce muscle dont tu ignorais l'existence jusqu'à ce qu'il se venge." },
+    diag: { t: "Le muscle inconnu", w: "Devant le tibia, un muscle relève ton pied à chaque foulée. Tu ignorais son existence. Il a décidé de se présenter." },
     exos: [
       { t: "Marche sur talons", d: "3 × 40 m, orteils vers le ciel", w: "Tu auras l'air ridicule. Tout le monde a l'air ridicule. C'est la beauté du trail." },
       { t: "Releveurs avec élastique", d: "3 × 20 par pied", w: "Le pied tire vers toi contre l'élastique. Trois séries et tu sentiras le muscle. Enfin." },
@@ -302,25 +304,25 @@ const KB = [
 
   // ── Cuisse ──
   { region: "cuisse", zone: "l'avant de la cuisse", keys: ["quadri", "quadriceps", "droit femoral", "vaste", "devant de la cuisse", ["cuisse", "devant"], ["cuisse", "avant"]],
-    diag: { t: "Surcharge excentrique du quadriceps", w: "En descente, le quadriceps freine en s'allongeant : c'est le travail excentrique, celui qui donne les courbatures de 48 h. Chamonix en est la capitale mondiale." },
+    diag: { t: "Les quadris de Chamonix", w: "En descente, la cuisse freine tout le corps. Les courbatures du surlendemain sont le souvenir qu'elle te laisse. Chamonix en est la capitale mondiale." },
     exos: [
       { t: "Descente de marche en contrôle", d: "3 × 12 par jambe, 4 s à la descente", w: "Les courbatures de descente prouvent que tu as fait la descente. Bravo. Recommence." },
       { t: "Squat bulgare", d: "3 × 8 par jambe, pied arrière sur un banc", w: "Le quadri protège le genou. Le quadri, c'est ton ami. Ton seul ami à ce stade de la sortie." },
     ]},
   { region: "cuisse", zone: "l'arrière de la cuisse", keys: ["ischio", "ischios", "ischio-jambier", "ischio-jambiers", "biceps femoral", "semi-tendineux", "arriere de la cuisse", ["cuisse", "arriere"], ["cuisse", "derriere"]],
-    diag: { t: "Élongation des ischio-jambiers", w: "Le biceps fémoral lâche souvent en fin de sortie, sur une accélération. Trois muscles, une seule ambition : te rappeler la séance de renfo sautée." },
+    diag: { t: "L'ischio qui tire", w: "L'arrière de la cuisse aime rappeler les séances de renfo sautées, souvent sur une accélération de fin de sortie. Si ça a lâché d'un coup : Antonin." },
     exos: [
       { t: "Nordic hamstring", d: "3 × 5, descente la plus lente possible, mains prêtes", w: "L'exercice préféré de personne. Il réduit de moitié les blessures des ischios. Efficace comme une côte à 25 %." },
       { t: "Pont fessier pieds sur chaise", d: "3 × 12, talons qui poussent", w: "Ischios longs et forts. Comme la liste des excuses pour rater le renfo." },
     ]},
   { region: "cuisse", zone: "l'intérieur de la cuisse", keys: ["adducteur", "adducteurs", "interieur de la cuisse", ["cuisse", "interieur"]],
-    diag: { t: "Tendinopathie des adducteurs", w: "Les adducteurs ramènent la jambe vers l'axe et stabilisent le bassin sur les terrains instables. En trail, le terrain est instable par définition." },
+    diag: { t: "Le muscle du ski", w: "Les adducteurs, à l'intérieur de la cuisse, stabilisent le bassin sur terrain instable. En trail, le terrain est instable par définition." },
     exos: [
       { t: "Copenhague (version genou)", d: "3 × 20 s par côté", w: "Inventé au Danemark pour les footballeurs. Adopté par les traileurs qui ont déjà tout essayé." },
       { t: "Squeeze d'un ballon entre les genoux", d: "5 × 10 s, allongé, genoux fléchis", w: "Tu écrases un ballon. C'est thérapeutique et légèrement défoulant." },
     ]},
   { region: "cuisse", zone: "les courbatures", keys: ["courbature", "courbatures", "doms", "mal aux jambes", "jambes lourdes", "jambes en bois"],
-    diag: { t: "DOMS (courbatures retardées)", w: "Micro-lésions des fibres après un effort inhabituel, surtout en descente. Pic à 24-72 h. Non, ce n'est pas de l'acide lactique : lui est parti depuis longtemps." },
+    diag: { t: "Les jambes en bois", w: "Ce n'est pas l'acide lactique (lui est parti depuis longtemps) : ce sont tes muscles qui se reconstruisent après une sortie inhabituelle. Pic à 48 h. Bienvenue." },
     exos: [
       { t: "Footing de récupération très lent", d: "20-30 min, en aisance respiratoire totale", w: "Le meilleur remède aux courbatures, c'est de bouger doucement. Le pire, c'est le canapé. Le deuxième pire, c'est l'escalier." },
       { t: "Jambes au mur", d: "10 min", w: "Le seul exercice où ne rien faire est la consigne. Profites-en, ça n'arrivera plus." },
@@ -328,26 +330,26 @@ const KB = [
 
   // ── Hanche / bassin ──
   { region: "hanche", zone: "la fesse (moyen fessier)", keys: ["moyen fessier", "fessier", "fessiers", "fesse", "fesses", "cote de la hanche", ["hanche", "cote"], ["hanche", "exterieur"]],
-    diag: { t: "Tendinopathie du moyen fessier", w: "Le moyen fessier tient ton bassin à l'horizontale quand tu es sur une jambe, soit 100 % du temps de course. Petit muscle, gros caractère." },
+    diag: { t: "La fesse en grève", w: "Sur le côté de la fesse, un muscle tient ton bassin droit à chaque foulée. Petit muscle, gros caractère, peut-être en grève. Ou pas." },
     exos: [
       { t: "Clam shell avec élastique", d: "3 × 15 par côté, bassin immobile", w: "Le moyen fessier : petit muscle, gros caractère. Si ta bandelette tire, c'est lui qui fait grève." },
       { t: "Pont fessier une jambe", d: "3 × 12 par jambe, tenir 2 s en haut", w: "Serre les fesses. C'est un conseil kiné et un conseil de vie." },
       { t: "Marche latérale avec élastique aux chevilles", d: "3 × 15 pas de chaque côté", w: "La « monster walk ». Fais-la au bureau, tu verras qui sont tes vrais amis." },
     ]},
   { region: "hanche", zone: "le fond de la fesse", keys: ["piriforme", "pyramidal", "sciatique", "nerf sciatique", "fond de la fesse", "fesse profonde", "fourmillement jambe"],
-    diag: { t: "Syndrome du piriforme", w: "Le piriforme est un petit muscle rotateur au fond de la fesse ; le nerf sciatique passe juste dessous (ou au travers, selon les gens). Quand il se crispe, la fesse brûle et ça peut descendre dans la jambe." },
+    diag: { t: "La fesse qui brûle", w: "Au fond de la fesse vivent de petits muscles et un gros nerf. Quand ça brûle ou que ça descend dans la jambe, c'est mystérieux. Les mystères, c'est pour Antonin." },
     exos: [
       { t: "Étirement du piriforme (figure 4)", d: "3 × 30 s par côté, cheville sur le genou opposé", w: "Ta jambe dessine un 4. Le piriforme se détend. Le mot « 4 » n'a jamais été aussi apaisant." },
       { t: "Balle de tennis contre un mur", d: "2 min par côté, sur le point qui fait « ah »", w: "Tu trouveras le point. Tu le sauras. Tout le monde à côté le saura." },
     ]},
   { region: "hanche", zone: "le pli de l'aine", keys: ["psoas", "flechisseur", "flechisseurs", "aine", "pli de l'aine", "pubalgie", "pubis", "devant de la hanche", ["hanche", "devant"]],
-    diag: { t: "Tendinopathie du psoas (ou pubalgie)", w: "Le psoas relève la cuisse à chaque pas de montée. Chez quelqu'un qui passe 9 h assis, il est plus court que sa liste de courses. La pubalgie, elle, mérite le vrai Antonin." },
+    diag: { t: "Le pli du bureau", w: "Le devant de la hanche des gens assis 9 h par jour est plus court que leur liste de courses. Mais l'aine, c'est un carrefour compliqué : Antonin si ça dure." },
     exos: [
       { t: "Fente basse, bassin en rétroversion", d: "3 × 30 s par côté, fesse serrée côté genou au sol", w: "Tu serres la fesse et le devant de la hanche s'étire tout seul. Magie de l'anatomie." },
       { t: "Montée de genou avec élastique", d: "3 × 12 par jambe, debout, lent", w: "On renforce le psoas, pas seulement on l'étire. Un muscle fort est un muscle calme." },
     ]},
   { region: "hanche", zone: "l'os de la hanche", keys: ["trochanter", "grand trochanter", "bursite hanche", "dormir sur le cote", "os de la hanche"],
-    diag: { t: "Douleur du grand trochanter", w: "La bosse osseuse sur le côté de la hanche, où s'insèrent les tendons fessiers. Signe typique : impossible de dormir sur ce côté." },
+    diag: { t: "La hanche qui empêche de dormir", w: "La bosse sur le côté de la hanche. Si tu ne peux plus dormir sur ce côté, ton matelas n'y est pour rien. Antonin, lui, saura." },
     exos: [
       { t: "Isométrie d'abduction debout", d: "5 × 45 s, le pied pousse contre un mur vers l'extérieur", w: "Pas de croisement de jambes, ni debout ni assis. C'est la règle numéro un. Oui, même en réunion." },
       { t: "Coussin entre les genoux la nuit", d: "Toutes les nuits", w: "Le seul exercice qui se fait en dormant. Le préféré de la team." },
@@ -355,20 +357,20 @@ const KB = [
 
   // ── Dos ──
   { region: "dos", zone: "le bas du dos", keys: ["lombaire", "lombaires", "lumbago", "bas du dos", "rein", "reins", "lombalgie", ["dos", "bas"]],
-    diag: { t: "Lombalgie commune du coureur", w: "Dans 9 cas sur 10, aucune lésion : des muscles fatigués et une colonne qui s'est fait secouer par la descente. Le dos aime le mouvement, pas le canapé." },
+    diag: { t: "Le dos du ravito du km 60", w: "Le bas du dos du coureur, c'est souvent des muscles fatigués et une colonne secouée par la descente. Souvent. Pas toujours. Si ça descend dans la jambe : Antonin." },
     exos: [
       { t: "Bird-dog", d: "3 × 10 par côté, 3 s de tenue, bassin de marbre", w: "Bras et jambe opposés. Si tu tombes, c'est le gainage qui parle. Écoute-le." },
       { t: "Dead bug", d: "3 × 12, lombaires collées au sol", w: "Il s'appelle « insecte mort ». C'est exactement ta posture au ravito du km 60." },
       { t: "Gainage latéral", d: "3 × 30 s par côté", w: "Le carré des lombes te tient debout quand le sac est lourd. Rends-lui hommage." },
     ]},
   { region: "dos", zone: "la sacro-iliaque", keys: ["sacro-iliaque", "sacro iliaque", "sacrum", "sacro", "coccyx", "bassin"],
-    diag: { t: "Dysfonction sacro-iliaque", w: "L'articulation entre le sacrum et le bassin bouge de quelques millimètres. Quelques millimètres de trop, et c'est une douleur en bas du dos d'un seul côté." },
+    diag: { t: "Le bassin qui grince", w: "Entre le bas du dos et le bassin, il y a une articulation qui bouge de quelques millimètres. Quelques millimètres, et tout un débat." },
     exos: [
       { t: "Pont fessier, ballon entre les genoux", d: "3 × 12", w: "On serre le ballon, on lève le bassin, on stabilise la sacro-iliaque. Trois verbes, un dos." },
       { t: "Genoux-poitrine en balancier", d: "1 min, allongé sur le dos", w: "Tu te berces. Personne ne regarde. Fais-le." },
     ]},
   { region: "dos", zone: "le haut du dos", keys: ["dorsal", "dorsales", "omoplate", "omoplates", "entre les omoplates", "haut du dos", ["dos", "haut"]],
-    diag: { t: "Tensions des rhomboïdes", w: "Les rhomboïdes relient les omoplates à la colonne. Sac à dos de trail plus une journée penché sur un écran : ils tirent sur leur laisse." },
+    diag: { t: "Les omoplates du sac à dos", w: "Le sac de trail plus une journée penchée sur un écran : les muscles entre les omoplates tirent sur leur laisse." },
     exos: [
       { t: "Rétraction des omoplates", d: "3 × 15, serrer comme pour tenir un crayon entre elles", w: "Imagine un crayon entre tes omoplates. Ne le fais pas tomber." },
       { t: "Ajuster le sac", d: "Sangles de poitrine plus hautes, sac serré près du dos", w: "Un sac qui ballotte, c'est 10 000 petits coups dans les rhomboïdes. On serre." },
@@ -376,25 +378,25 @@ const KB = [
 
   // ── Haut du corps ──
   { region: "epaule", zone: "l'épaule", keys: ["epaule", "epaules", "coiffe", "coiffe des rotateurs", "sus-epineux", "sac a dos", ["epaule", "baton"]],
-    diag: { t: "Tendinopathie de la coiffe des rotateurs", w: "Quatre petits muscles tiennent la tête de l'humérus dans une articulation grande comme une balle de golf posée sur un tee. Deux jours de bâtons, et le sus-épineux proteste." },
+    diag: { t: "L'épaule de bâtons", w: "Deux jours de bâtons, et l'épaule découvre qu'elle sert à autre chose qu'à porter le sac. Si elle ne se lève plus : Antonin." },
     exos: [
       { t: "Rotation externe avec élastique", d: "3 × 15 par bras, coude collé au corps", w: "Deux jours de bâtons et l'épaule découvre qu'elle sert à autre chose qu'à porter le sac." },
       { t: "Face pull", d: "3 × 15, élastique à hauteur du visage", w: "Ouvre la cage. Respire. Regarde le paysage, tu l'as payé cher." },
     ]},
   { region: "bras", zone: "le coude", keys: ["coude", "coudes", "epicondyle", "epicondylite", "tennis elbow"],
-    diag: { t: "Épicondylite latérale", w: "Le « tennis elbow » du traileur : les extenseurs du poignet tirent sur l'épicondyle à chaque appui de bâton. Le tennis n'y est pour rien." },
+    diag: { t: "Le coude du tire-bouchon", w: "Les muscles de l'avant-bras tirent sur le coude à chaque appui de bâton. Ou à chaque bouchon. L'enquête est ouverte." },
     exos: [
       { t: "Extension du poignet excentrique", d: "3 × 15 avec une bouteille (pleine, tant qu'à faire)", w: "Une douleur au coude chez un coureur, c'est soit les bâtons, soit le tire-bouchon. Dans les deux cas, on renforce." },
       { t: "Dragonnes réglées", d: "La main appuie dans la dragonne, pas sur la poignée", w: "Si tu serres fort la poignée, ce sont tes avant-bras qui portent ton corps. Laisse faire la dragonne." },
     ]},
   { region: "bras", zone: "le poignet et le pouce", keys: ["poignet", "pouce", "de quervain", "main", "mains", "doigts gonfles", "mains gonflees"],
-    diag: { t: "Ténosynovite de De Quervain", w: "Les tendons du pouce glissent dans un tunnel sur le bord du poignet. Le geste du bâton, répété 20 000 fois, l'irrite. Et les mains qui gonflent en courant ? Juste la circulation : bouge les doigts." },
+    diag: { t: "Le pouce du bâton", w: "Le geste du bâton, répété 20 000 fois, peut agacer le poignet. Et les mains qui gonflent en courant ? Bouge les doigts, c'est la circulation." },
     exos: [
       { t: "Serrer et ouvrir la main", d: "2 × 20, toutes les heures en sortie longue", w: "Ça fait circuler le sang et ça décrispe le pouce. Ça te donne aussi un air déterminé." },
       { t: "Glissement des tendons du pouce", d: "2 × 10, doucement", w: "Pouce dans le poing, poignet qui penche doucement vers le petit doigt. Doucement, on a dit." },
     ]},
   { region: "nuque", zone: "la nuque et les trapèzes", keys: ["cou", "nuque", "cervical", "cervicales", "trapeze", "trapezes", "torticolis"],
-    diag: { t: "Contracture du trapèze supérieur", w: "Les trapèzes remontent quand on stresse, quand on porte le sac et quand on regarde le dénivelé restant. Les trois en même temps, c'est un ultra." },
+    diag: { t: "Les épaules aux oreilles", w: "Les trapèzes remontent quand on stresse, quand on porte le sac et quand on regarde le dénivelé restant. Les trois en même temps, c'est un ultra." },
     exos: [
       { t: "Rétraction cervicale (double menton)", d: "3 × 10, tenir 5 s", w: "Tu fais un double menton volontaire. Oui. C'est de la science." },
       { t: "Étirement du trapèze supérieur", d: "3 × 30 s par côté, épaule opposée basse", w: "L'oreille vers l'épaule, l'autre épaule vers le sol. Inspire. Pense au Champex-Lac." },
@@ -402,19 +404,19 @@ const KB = [
 
   // ── Tronc ──
   { region: "tronc", zone: "le point de côté", keys: ["point de cote", "diaphragme", "sous les cotes", "mal aux cotes", "flanc"],
-    diag: { t: "Douleur abdominale transitoire liée à l'effort", w: "Son vrai nom scientifique. Probablement une irritation du péritoine ou un diaphragme qui s'agace, souvent après avoir mangé ou bu trop vite." },
+    diag: { t: "Le point de côté", w: "Même la science ne sait pas trop d'où il vient. On soupçonne le diaphragme, le repas d'avant, le verre d'eau d'un coup. AntoninGPT soupçonne le gâteau." },
     exos: [
       { t: "Expiration sur le pied opposé", d: "Expire fort quand le pied opposé à la douleur touche le sol", w: "Ça décale la contrainte sur le diaphragme. Ça marche une fois sur deux. L'autre fois, tu marches." },
       { t: "Gainage du transverse", d: "3 × 30 s de « ventre rentré » allongé", w: "Les gens qui ont un bon gainage ont moins de points de côté. Coïncidence ? Non, étude australienne." },
     ]},
   { region: "tronc", zone: "les frottements", keys: ["teton", "tetons", "mamelon", "mamelons", "irritation", "frottement", "frottements", "entrejambe", "aisselle", "aisselles", "brulure peau"],
-    diag: { t: "Dermite de friction", w: "Le « téton du joggeur » est une vraie entité médicale. Le tee-shirt en coton frotte 15 000 fois en marathon. Le résultat finit sur les photos d'arrivée." },
+    diag: { t: "Le téton du joggeur", w: "Le tee-shirt frotte 15 000 fois sur un marathon. Le résultat finit sur les photos d'arrivée. C'est une vraie chose, et c'est très drôle pour tout le monde sauf pour toi." },
     exos: [
       { t: "Pansements préventifs ou crème anti-frottement", d: "Avant chaque sortie de plus de 1 h", w: "Le seul exercice de ce chat qui ne demande aucun effort. Rien que pour ça, fais-le." },
       { t: "Cuissard sous le short", d: "1 cuissard long, pas de couture intérieure", w: "L'entrejambe ne doit jamais devenir un sujet de conversation au ravito." },
     ]},
   { region: "tronc", zone: "le ventre", keys: ["ventre", "estomac", "nausee", "nausees", "digestion", "intestin", "intestins", "toilettes", "gel", "gels"],
-    diag: { t: "Troubles digestifs d'effort", w: "À l'effort, le sang file vers les muscles et le tube digestif se met en grève. Le ventre, ça s'entraîne : on teste les gels avant la course, jamais le jour J." },
+    diag: { t: "Le ventre en grève", w: "À l'effort, le sang file vers les jambes et le ventre se met en grève. Le ventre, ça s'entraîne aussi : on teste les gels avant la course, jamais le jour J." },
     exos: [
       { t: "Entraînement de l'estomac", d: "Prendre ses gels en sortie longue, toutes les 30-40 min", w: "Ton intestin apprend à absorber pendant l'effort. Oui, l'intestin a son propre plan d'entraînement." },
       { t: "Ravito testé", d: "Ne rien manger le jour J que tu n'aies déjà testé", w: "La soupe de Champex à 23 h, tu l'as testée ? Non ? Alors pense-y." },
@@ -422,12 +424,12 @@ const KB = [
 
   // ── Le reste du corps (et de l'âme) ──
   { zone: "la tête", keys: ["tete", "crane", "migraine", "gueule de bois", "mal de tete", "cerveau"],
-    diag: { t: "Céphalée de déshydratation", w: "Le mal de tête du coureur : 80 % de déshydratation, 20 % de la conversation d'hier soir." },
+    diag: { t: "La tête du lendemain", w: "80 % de déshydratation, 20 % de la conversation d'hier soir. Une vraie migraine qui ne passe pas, c'est un médecin, pas un chat." },
     exos: [
       { t: "Hydratation active", d: "1 grand verre d'eau, puis un autre, puis on discute", w: "Avec une pincée de sel, c'est encore mieux. Sans tequila, c'est mieux aussi." },
     ]},
   { zone: "partout", keys: ["partout", "tout", "entier", "corps", "tout le corps", "de partout", "jambes", "jambe"],
-    diag: { t: "Fatigue globale (syndrome du « j'ai trop forcé »)", w: "Quand tout fait mal, ce n'est pas une blessure, c'est une semaine de charge. Ton corps demande du sommeil, pas un diagnostic." },
+    diag: { t: "Le syndrome du « j'ai trop forcé »", w: "Quand tout fait mal, ce n'est souvent pas une blessure : c'est une grosse semaine. Ton corps demande du sommeil, pas un diagnostic." },
     exos: [
       { t: "Jambes au mur", d: "10 min, allongé, jambes à la verticale contre un mur", w: "Le seul exercice où ne rien faire est la consigne. Profites-en, ça n'arrivera plus." },
       { t: "Marche lente 20 min", d: "20 min, sans montre, sans Strava", w: "Sans Strava, ça a quand même existé. Promis." },
@@ -470,7 +472,7 @@ const CONTEXT = [
   { keys: ["les deux", "deux cotes", "deux jambes"], txt: "des deux côtés (au moins c'est symétrique)" },
   { keys: ["descente", "descentes", "en descendant"], txt: "surtout en descente", quip: "La descente : là où se gagnent les courses et se perdent les quadriceps." },
   { keys: ["montee", "montees", "en montant", "cote raide"], txt: "surtout en montée", quip: "En montée, tout le monde a mal. C'est même à ça qu'on la reconnaît." },
-  { keys: ["matin", "au reveil", "premiers pas", "en me levant"], txt: "le matin au réveil", quip: "Douleur du matin qui s'estompe en marchant : signature classique d'un tendon ou d'une aponévrose." },
+  { keys: ["matin", "au reveil", "premiers pas", "en me levant"], txt: "le matin au réveil", quip: "La douleur du matin qui disparaît en marchant : ton corps fait semblant que tout va bien. Ne le crois pas sur parole." },
   { keys: ["nuit", "la nuit"], txt: "même la nuit", quip: "Une douleur qui réveille la nuit, c'est le genre de détail que le vrai Antonin voudra entendre." },
   { keys: ["apres la course", "apres la sortie", "apres l'effort", "le lendemain", "lendemain"], txt: "après l'effort" },
   { keys: ["en courant", "pendant la course", "pendant la sortie", "au bout de"], txt: "pendant la course" },
@@ -514,23 +516,51 @@ function readContext(text) {
 }
 
 const VINS = [
+  // Les classiques du chat
   { t: "Morgon (Beaujolais)", w: "Léger, fruité, tout en gamay. Comme ta foulée devrait l'être." },
   { t: "Crozes-Hermitage", w: "De la syrah des pentes. Elle connaît le dénivelé, elle." },
-  { t: "Chinon (Loire)", w: "Cabernet franc, un peu de poivron. Antonin dirait « anti-inflammatoire ». Antonin n'est pas là." },
+  { t: "Chinon (Loire)", w: "Cabernet franc, un peu de poivron. Antonin dirait « anti-inflammatoire ». Antonin n'a jamais dit ça." },
   { t: "Saint-Joseph", w: "Un vin de côte. La côte, tu connais." },
   { t: "Bourgogne aligoté", w: "Vif, minéral, sans prétention. Le vin idéal pour quelqu'un qui a fait 40 km et 2 000 m de D+ et qui « n'a pas trop forcé »." },
   { t: "Arbois (Jura)", w: "Un poulsard, léger, presque une tisane. C'est le vin de récupération officiel de la Rosière. On l'affirme." },
   { t: "Côtes-du-Rhône villages", w: "Chaleureux, généreux, comme un ravito à Champex-Lac." },
-  { t: "Mondeuse de Savoie", w: "Le cépage du massif. Boire local, c'est aussi de la préparation UTMB." },
-  { t: "Champagne", w: "Réservé aux blessures de plus de 3 semaines. Ou aux finishers. Ou aux mardis." },
-  { t: "Verre d'eau gazeuse", w: "Antonin surveille peut-être ce chat. On ne sait jamais." },
   { t: "Gigondas", w: "Un vin qui tient les jambes. Enfin, qui les fait tenir. Enfin, qui fait qu'on ne sent plus qu'elles ne tiennent pas." },
   { t: "Sancerre rouge", w: "Un pinot noir fin et discret. Comme la douleur au genou droit dont tu ne parles à personne." },
+  { t: "Champagne", w: "Réservé aux blessures de plus de 3 semaines. Ou aux finishers. Ou aux mardis." },
+  { t: "Verre d'eau gazeuse", w: "Antonin surveille peut-être ce chat. On ne sait jamais." },
+  // Sur le parcours de la CCC
+  { t: "Blanc de Morgex et de La Salle", w: "Vignes à 1 200 m, au pied du Mont-Blanc, à deux pas du départ de Courmayeur. Le seul vin qui a plus de D+ que toi." },
+  { t: "Torrette (Vallée d'Aoste)", w: "Un rouge de montagne italien. Buono pour le moral, neutre pour les ischios." },
+  { t: "Fumin (Vallée d'Aoste)", w: "Sombre, épicé, un peu sauvage. Comme toi au Grand Col Ferret à 4 h du matin." },
+  { t: "Petite Arvine (Valais)", w: "Un blanc salin du Valais, comme ton front après la montée de La Fouly." },
+  { t: "Fendant (Valais)", w: "Le chasselas des Suisses. Léger, précis, ponctuel. Tout ce que ton allure n'est pas." },
+  { t: "Cornalin (Valais)", w: "Un rouge rare du Valais. Rare comme une descente sans douleur aux quadris." },
+  { t: "Mondeuse de Savoie", w: "Le cépage du massif. Boire local, c'est aussi de la préparation UTMB." },
+  { t: "Chignin-Bergeron (Savoie)", w: "Une roussanne de Savoie, ronde et fière. Le vin qui dit « j'ai fini », même quand ce n'est pas vrai." },
+  { t: "Apremont (Savoie)", w: "Le blanc de la raclette. Ta récupération mérite une raclette. C'est scientifique (non)." },
+  // Pour les zones qui le méritent
+  { t: "Crémant du Jura", w: "Des bulles pour les frottements : ça pique un peu, mais c'est festif." },
+  { t: "Vin jaune (Jura)", w: "Il vieillit six ans sous un voile avant d'être prêt. Ton tendon aussi prend son temps. Patience." },
+  { t: "Muscadet sur lie", w: "Iodé, nerveux, léger. Parfait pour un ventre en grève, à condition d'en boire très peu. Genre une gorgée." },
+  { t: "Pic Saint-Loup", w: "Un vin de garrigue qui pousse au pied d'un pic. Tu vois le rapport. Il n'y en a pas d'autre." },
+  { t: "Cahors", w: "Le « vin noir ». Comme ton ongle d'orteil après la descente de Trient." },
+  { t: "Madiran", w: "Tannique, costaud, pour les ischios qui ont tout donné. Le vin qui dit « et maintenant on s'étire »." },
+  { t: "Bandol rosé", w: "Pour les jours où tout fait mal mais où il fait beau." },
+  { t: "Vouvray demi-sec", w: "Un peu de douceur pour un corps qui n'en a pas reçu depuis le dernier fractionné." },
+  { t: "Irouléguy", w: "Un vin basque de coteaux très raides. Il a fait du trail avant toi." },
+  { t: "Collioure", w: "Des vignes en terrasses au-dessus de la mer. Du D+ avec vue. Tu connais le principe." },
+  { t: "Fleurie (Beaujolais)", w: "Floral et léger. À servir quand le diagnostic est « tu n'as rien, tu es juste fatigué »." },
+  { t: "Saumur-Champigny", w: "Fruité, facile, frais. Le vin de la sortie longue qui s'est finalement bien passée." },
+  { t: "Gewurztraminer vendanges tardives", w: "Très sucré. Remplace ton gel de ravito. Non. Surtout pas. C'est une blague." },
+  { t: "Châteauneuf-du-Pape", w: "Treize cépages. Comme le nombre de douleurs que tu as eues cette semaine." },
+  { t: "Riesling d'Alsace", w: "Droit, tendu, précis. Tout ce qu'on souhaite à ta bandelette." },
+  { t: "Tisane verveine-tilleul", w: "Option « semaine sans alcool ». AntoninGPT respecte ton choix. Il est même un peu fier." },
+  { t: "Bière sans alcool", w: "La boisson de récupération préférée des Allemands. Isotonique, pétillante, et Antonin ne pourra rien dire." },
 ];
 
 const HELLO = [
   "Salut. Antonin s'est accordé quelques jours de repos (oui, lui aussi a le droit). En attendant, c'est moi qui prends le relais.",
-  "Dis-moi où tu as mal, le plus précisément possible (côté, moment, ce que ça fait). Je te donne un diagnostic, <b>un</b> exercice et <b>un</b> vin. Un seul de chaque : la modération, c'est la clé de la progression.",
+  "Dis-moi où tu as mal, le plus précisément possible (côté, moment, ce que ça fait). Je te donne mon avis (zéro diplôme), <b>un</b> exercice et <b>un</b> vin. Pour les vraies douleurs, c'est Antonin, toujours. Un seul de chaque : la modération, c'est la clé de la progression.",
 ];
 
 const THINKING = [
@@ -540,7 +570,8 @@ const THINKING = [
 ];
 
 const FOOT = [
-  "Si la douleur persiste plus de 72 h ou après 2 verres, consulter un vrai Antonin.",
+  "Si la douleur persiste plus de 72 h ou après 2 verres, consulter le vrai Antonin.",
+  "AntoninGPT invente tout. C'est pour ça qu'il est drôle. C'est aussi pour ça qu'il faut voir Antonin.",
   "Ne pas dépasser la dose prescrite. Pour l'exercice, on peut négocier.",
   "Généré automatiquement. Antonin décline toute responsabilité, et il n'est même pas au courant.",
   "Le vin ne remplace pas la kiné. La kiné ne remplace pas le vin. Équilibre.",
@@ -600,9 +631,10 @@ function prescription(zone, ctx) {
   const intro = zone.zone === "nulle part" ? "« Nulle part ». Je vois." :
     `Alors : <b>${zone.zone}</b>${precis.length ? ", " + precis.join(", ") : ""}. Je vois. Je vois très bien.`;
   return `<p>${intro}</p>${quip ? `<p>${quip.quip}</p>` : ""}
-    <div class="card diag"><div class="label">Diagnostic (très sérieux)</div><div class="title">${zone.diag.t}</div><div class="why">${zone.diag.w}</div></div>
+    <div class="card diag"><div class="label">L'avis d'AntoninGPT (zéro diplôme)</div><div class="title">${zone.diag.t}</div><div class="why">${zone.diag.w}</div></div>
     <div class="card exo"><div class="label">Exercice</div><div class="title">${e.t}</div><div class="dose">${e.d}</div><div class="why">${e.w}</div></div>
     <div class="card vin"><div class="label">Accord vin</div><div class="title">${v.t}</div><div class="why">${v.w}</div></div>
+    <div class="card antonin"><b>Si ça fait vraiment mal, si ça dure ou si ça empire : Antonin.</b> Le vrai. Celui qui a des mains et un diplôme. AntoninGPT n'a ni l'un ni l'autre.</div>
     <div class="foot">${pick(FOOT)}</div>`;
 }
 

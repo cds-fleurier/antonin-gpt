@@ -45,3 +45,8 @@ AntoninGPT n'est pas kiné. Antonin, lui, oui. Et il revient bientôt.
   gonfle, « crac ») ; gonflement / « crac » / douleur la nuit → renvoi vers le vrai Antonin.
 - Clés : chaîne = expression, tableau = tous les mots présents ; la plus spécifique gagne ; une zone précise de la même région
   l'emporte sur la question de précision. Test : script Node qui vérifie que chaque puce retombe sur sa zone + ~35 phrases réelles.
+
+## v2.1 (24/11/2026) — demande de Charles
+- Plus aucun vrai diagnostic : carte « L'avis d'AntoninGPT (zéro diplôme) » = surnom drôle + « suspects habituels », jamais d'affirmation.
+- Renvoi systématique vers le vrai Antonin dans chaque réponse (carte en pointillés), en plus des signaux d'alerte (gonflement, « crac », nuit).
+- 37 vins (12 avant), dont le parcours CCC : Blanc de Morgex et de La Salle, Torrette, Fumin, Petite Arvine, Fendant, Cornalin, Savoie ; + options sans alcool.
