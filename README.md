@@ -53,3 +53,13 @@ AntoninGPT n'est pas kiné. Antonin, lui, oui. Et il revient bientôt.
 
 ## v2.2 (24/11/2026)
 - Zone intime prévue (vulve, « chatte », testicules, périnée…) : AntoninGPT rougit, blague vétérinaire si « chatte/minou », seul conseil utile = anti-frottement, renvoi médecin / gynéco / urologue (pas Antonin). Pas de vulgarité. « queue » et « lèvres » seuls exclus (queue de cheval = nerfs du bas du dos ; lèvres = bouche).
+
+## v2.3 (24/11/2026) — parties communes du corps
+- Remontée de Charles : « clavicule » non reconnue. Test de couverture sur 117 parties du corps : 55 inconnues → 0.
+- Nouvelles zones : clavicule, haut du bras (biceps/triceps), abdos, côtes/sternum/pectoraux/seins, mâchoire/dents, yeux,
+  gorge/nez/oreilles, peau (soleil, ronces), souffle (essoufflement normal en montée) ; région « visage » qui demande de préciser.
+  Clés ajoutées : doigts, paume, colonne, vertèbres, dorsaux, deltoïde, fémur, péroné, front, tempe, nombril, vessie, tendon…
+- **Zone sérieuse** (`serious: true`) : poitrine, palpitations, cœur qui s'emballe, malaise, vertiges, difficulté à respirer →
+  pas d'exercice, pas de vin, pas de blague : médecin sans attendre, 15 / 112 si intense. « Mal au cœur » = nausée → ventre.
+- Bug corrigé : « œ » n'était pas normalisé (« cœur » jamais reconnu).
+- Test : `agpt-body.cjs` (117 parties) + test des puces + phrases réelles.

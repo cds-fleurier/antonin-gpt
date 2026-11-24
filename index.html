@@ -277,7 +277,7 @@ const KB = [
       { t: "Étirement doux pendant la crampe", d: "20-30 s, sans forcer", w: "Le muscle antagoniste se contracte, le muscle crampé se calme. Le corps humain est un système de négociation." },
       { t: "Plus de renfo, moins de légendes", d: "2 séances de renfo par semaine pendant 6 semaines", w: "La crampe du km 30 se prévient au km 0, en septembre." },
     ]},
-  { region: "achille", zone: "le tendon d'Achille", keys: ["achille", "tendon d'achille", "tendinite achille", "tendon", ["achille", "milieu"]],
+  { region: "achille", zone: "le tendon d'Achille", keys: ["achille", "tendon d'achille", "tendinite achille", ["achille", "milieu"]],
     diag: { t: "Le tendon du héros grec", w: "Achille est mort d'une flèche au talon. Toi, c'est probablement la sortie de dimanche. Un tendon qui fait mal le matin, ça se montre à Antonin, ça ne se négocie pas." },
     exos: [
       { t: "Protocole Alfredson (excentrique lent)", d: "3 × 15, genou tendu puis genou fléchi, 2 fois par jour", w: "Le seul protocole au monde nommé d'après un mec qui voulait se rompre le tendon pour se faire opérer. Il a échoué. Il a inventé la kiné du tendon." },
@@ -295,7 +295,7 @@ const KB = [
       { t: "Montée sur pointe, 3 orientations", d: "3 × 12 pieds droits, rentrés, ouverts", w: "Les mollets absorbent l'impact à la place du tibia. Des mollets forts, un tibia tranquille." },
       { t: "Réduction du volume de 30 %", d: "2 semaines, puis +10 % par semaine", w: "La règle des 10 % n'est pas sexy. Elle fonctionne." },
     ]},
-  { region: "tibia", zone: "l'avant de la jambe", keys: ["tibial anterieur", "releveur", "releveurs", "devant de la jambe", "loge anterieure", ["tibia", "devant"], ["tibia", "exterieur"]],
+  { region: "tibia", zone: "l'avant de la jambe", keys: ["tibial anterieur", "perone", "fibula", "releveur", "releveurs", "devant de la jambe", "loge anterieure", ["tibia", "devant"], ["tibia", "exterieur"]],
     diag: { t: "Le muscle inconnu", w: "Devant le tibia, un muscle relève ton pied à chaque foulée. Tu ignorais son existence. Il a décidé de se présenter." },
     exos: [
       { t: "Marche sur talons", d: "3 × 40 m, orteils vers le ciel", w: "Tu auras l'air ridicule. Tout le monde a l'air ridicule. C'est la beauté du trail." },
@@ -303,7 +303,7 @@ const KB = [
     ]},
 
   // ── Cuisse ──
-  { region: "cuisse", zone: "l'avant de la cuisse", keys: ["quadri", "quadriceps", "droit femoral", "vaste", "devant de la cuisse", ["cuisse", "devant"], ["cuisse", "avant"]],
+  { region: "cuisse", zone: "l'avant de la cuisse", keys: ["quadri", "quadriceps", "femur", "droit femoral", "vaste", "devant de la cuisse", ["cuisse", "devant"], ["cuisse", "avant"]],
     diag: { t: "Les quadris de Chamonix", w: "En descente, la cuisse freine tout le corps. Les courbatures du surlendemain sont le souvenir qu'elle te laisse. Chamonix en est la capitale mondiale." },
     exos: [
       { t: "Descente de marche en contrôle", d: "3 × 12 par jambe, 4 s à la descente", w: "Les courbatures de descente prouvent que tu as fait la descente. Bravo. Recommence." },
@@ -356,7 +356,7 @@ const KB = [
     ]},
 
   // ── Dos ──
-  { region: "dos", zone: "le bas du dos", keys: ["lombaire", "lombaires", "lumbago", "bas du dos", "rein", "reins", "lombalgie", ["dos", "bas"]],
+  { region: "dos", zone: "le bas du dos", keys: ["lombaire", "lombaires", "lombes", "lumbago", "bas du dos", "colonne", "colonne vertebrale", "vertebre", "vertebres", "rein", "reins", "lombalgie", ["dos", "bas"]],
     diag: { t: "Le dos du ravito du km 60", w: "Le bas du dos du coureur, c'est souvent des muscles fatigués et une colonne secouée par la descente. Souvent. Pas toujours. Si ça descend dans la jambe : Antonin." },
     exos: [
       { t: "Bird-dog", d: "3 × 10 par côté, 3 s de tenue, bassin de marbre", w: "Bras et jambe opposés. Si tu tombes, c'est le gainage qui parle. Écoute-le." },
@@ -369,7 +369,7 @@ const KB = [
       { t: "Pont fessier, ballon entre les genoux", d: "3 × 12", w: "On serre le ballon, on lève le bassin, on stabilise la sacro-iliaque. Trois verbes, un dos." },
       { t: "Genoux-poitrine en balancier", d: "1 min, allongé sur le dos", w: "Tu te berces. Personne ne regarde. Fais-le." },
     ]},
-  { region: "dos", zone: "le haut du dos", keys: ["dorsal", "dorsales", "omoplate", "omoplates", "entre les omoplates", "haut du dos", ["dos", "haut"]],
+  { region: "dos", zone: "le haut du dos", keys: ["dorsal", "dorsales", "dorsaux", "grand dorsal", "omoplate", "omoplates", "entre les omoplates", "haut du dos", ["dos", "haut"]],
     diag: { t: "Les omoplates du sac à dos", w: "Le sac de trail plus une journée penchée sur un écran : les muscles entre les omoplates tirent sur leur laisse." },
     exos: [
       { t: "Rétraction des omoplates", d: "3 × 15, serrer comme pour tenir un crayon entre elles", w: "Imagine un crayon entre tes omoplates. Ne le fais pas tomber." },
@@ -377,7 +377,7 @@ const KB = [
     ]},
 
   // ── Haut du corps ──
-  { region: "epaule", zone: "l'épaule", keys: ["epaule", "epaules", "coiffe", "coiffe des rotateurs", "sus-epineux", "sac a dos", ["epaule", "baton"]],
+  { region: "epaule", zone: "l'épaule", keys: ["epaule", "epaules", "deltoide", "coiffe", "coiffe des rotateurs", "sus-epineux", "sac a dos", ["epaule", "baton"]],
     diag: { t: "L'épaule de bâtons", w: "Deux jours de bâtons, et l'épaule découvre qu'elle sert à autre chose qu'à porter le sac. Si elle ne se lève plus : Antonin." },
     exos: [
       { t: "Rotation externe avec élastique", d: "3 × 15 par bras, coude collé au corps", w: "Deux jours de bâtons et l'épaule découvre qu'elle sert à autre chose qu'à porter le sac." },
@@ -389,7 +389,7 @@ const KB = [
       { t: "Extension du poignet excentrique", d: "3 × 15 avec une bouteille (pleine, tant qu'à faire)", w: "Une douleur au coude chez un coureur, c'est soit les bâtons, soit le tire-bouchon. Dans les deux cas, on renforce." },
       { t: "Dragonnes réglées", d: "La main appuie dans la dragonne, pas sur la poignée", w: "Si tu serres fort la poignée, ce sont tes avant-bras qui portent ton corps. Laisse faire la dragonne." },
     ]},
-  { region: "bras", zone: "le poignet et le pouce", keys: ["poignet", "pouce", "de quervain", "main", "mains", "doigts gonfles", "mains gonflees"],
+  { region: "bras", zone: "le poignet et le pouce", keys: ["poignet", "pouce", "de quervain", "main", "mains", "doigt", "doigts", "paume", "phalange", "phalanges", "doigts gonfles", "mains gonflees"],
     diag: { t: "Le pouce du bâton", w: "Le geste du bâton, répété 20 000 fois, peut agacer le poignet. Et les mains qui gonflent en courant ? Bouge les doigts, c'est la circulation." },
     exos: [
       { t: "Serrer et ouvrir la main", d: "2 × 20, toutes les heures en sortie longue", w: "Ça fait circuler le sang et ça décrispe le pouce. Ça te donne aussi un air déterminé." },
@@ -415,13 +415,72 @@ const KB = [
       { t: "Pansements préventifs ou crème anti-frottement", d: "Avant chaque sortie de plus de 1 h", w: "Le seul exercice de ce chat qui ne demande aucun effort. Rien que pour ça, fais-le." },
       { t: "Cuissard sous le short", d: "1 cuissard long, pas de couture intérieure", w: "L'entrejambe ne doit jamais devenir un sujet de conversation au ravito." },
     ]},
-  { region: "tronc", zone: "le ventre", keys: ["ventre", "estomac", "nausee", "nausees", "digestion", "intestin", "intestins", "toilettes", "gel", "gels"],
+  { region: "tronc", zone: "le ventre", keys: ["ventre", "estomac", "nombril", "vessie", "envie de faire pipi", "bas du ventre", "foie", "mal au coeur", "envie de vomir", "nausee", "nausees", "digestion", "intestin", "intestins", "toilettes", "gel", "gels"],
     diag: { t: "Le ventre en grève", w: "À l'effort, le sang file vers les jambes et le ventre se met en grève. Le ventre, ça s'entraîne aussi : on teste les gels avant la course, jamais le jour J." },
     exos: [
       { t: "Entraînement de l'estomac", d: "Prendre ses gels en sortie longue, toutes les 30-40 min", w: "Ton intestin apprend à absorber pendant l'effort. Oui, l'intestin a son propre plan d'entraînement." },
       { t: "Ravito testé", d: "Ne rien manger le jour J que tu n'aies déjà testé", w: "La soupe de Champex à 23 h, tu l'as testée ? Non ? Alors pense-y." },
     ]},
 
+  // ── Haut du corps, tête, peau (v2.3 : parties communes du corps) ──
+  { region: "epaule", zone: "la clavicule", keys: ["clavicule", "clavicules"],
+    diag: { t: "La clavicule porte-sac", w: "La clavicule, cet os en forme de S qui tient ton épaule écartée. Les bretelles du sac à dos adorent s'y appuyer. Si tu es tombé dessus : radio, pas blague." },
+    exos: [
+      { t: "Régler les bretelles du sac", d: "Sangle de poitrine plus haute, bretelles qui ne frottent plus l'os", w: "Un sac bien réglé repose sur le dos, pas sur la clavicule. Ta clavicule n'est pas un porte-manteau." },
+      { t: "Ouverture de la poitrine", d: "3 × 30 s, mains dans le dos, omoplates serrées", w: "Tu ouvres le thorax comme au sommet d'un col. Sans le col. Sans la vue. Mais quand même." },
+    ]},
+  { region: "bras", zone: "le haut du bras", keys: ["biceps", "triceps", "haut du bras", "bras", "avant-bras", "avant bras"],
+    diag: { t: "Les bras de bâtons", w: "Tu croyais que le trail se courait avec les jambes. Deux heures de bâtons, et les triceps découvrent qu'ils participent." },
+    exos: [
+      { t: "Pompes inclinées", d: "3 × 10, mains sur une table", w: "Le triceps pousse les bâtons. Un triceps entraîné pousse les bâtons sans se plaindre." },
+      { t: "Bâtons plus courts en montée", d: "Avant-bras à l'horizontale, poignée tenue bas", w: "Si tes bâtons sont trop longs, tu fais des tractions sur toute la montée. Ce n'est pas de l'escalade." },
+    ]},
+  { region: "tronc", zone: "les abdos", keys: ["abdos", "abdominaux", "abdominal", "plexus", "taille", "obliques", "tablette"],
+    diag: { t: "La tablette de chocolat en travaux", w: "Les abdos travaillent à chaque foulée pour tenir le tronc. Ou alors tu as fait du gainage pour la première fois depuis 2019. Les deux sont honorables." },
+    exos: [
+      { t: "Gainage ventral", d: "3 × 30 s, corps aligné, fesses ni hautes ni basses", w: "Si ça tremble, c'est que ça travaille. Si ça ne tremble pas, tu triches." },
+      { t: "Rire beaucoup", d: "Une soirée avec la team", w: "Le rire fait travailler les abdominaux. C'est le gainage le plus agréable du monde." },
+    ]},
+  { region: "tronc", zone: "les côtes", keys: ["cotes", "cote flottante", "cotes flottantes", "sternum", "pectoraux", "pectoral", "pecs", "sein", "seins", "brassiere"],
+    diag: { t: "La cage qui grince", w: "Côtes, sternum, pectoraux : la cage thoracique bouge à chaque respiration, donc 20 000 fois par sortie. Une brassière mal ajustée ou un sac trop serré suffisent à la fâcher. Après une chute, ou si respirer fort fait mal : médecin." },
+    exos: [
+      { t: "Respiration ventrale", d: "5 min, allongé, main sur le ventre qui monte", w: "Tu respires avec le ventre, la cage se repose. Tu découvres aussi que tu respirais mal depuis 30 ans." },
+      { t: "Ajuster brassière ou sangle de poitrine", d: "Un cran de moins", w: "Le matériel est le premier suspect. Il est toujours le premier suspect." },
+    ]},
+  { region: "tete", zone: "la mâchoire", keys: ["machoire", "dents", "dent", "menton", "joue", "joues"],
+    diag: { t: "Les dents serrées de la montée", w: "En montée raide, beaucoup de coureurs serrent la mâchoire sans s'en rendre compte. Les muscles qui ferment la bouche sont parmi les plus puissants du corps. Ils n'ont rien à faire dans ta montée." },
+    exos: [
+      { t: "Relâcher la mâchoire", d: "À chaque borne kilométrique, langue posée au palais, dents écartées", w: "Un visage détendu court mieux. C'est aussi plus joli sur les photos de course." },
+      { t: "Sourire en côte", d: "10 secondes, même forcé", w: "Le sourire forcé décrispe la mâchoire. Et ça fait peur aux autres concurrents." },
+    ]},
+  { region: "tete", zone: "les yeux", keys: ["oeil", "yeux", "paupiere", "paupieres", "vue"],
+    diag: { t: "Les yeux qui piquent", w: "La sueur salée qui coule du front, le soleil en altitude, le vent des crêtes. Tes yeux ont fait le même trail que toi, sans lunettes." },
+    exos: [
+      { t: "Casquette ou bandeau", d: "Sur la tête, à chaque sortie", w: "Le bandeau arrête la sueur avant les yeux. Il est aussi très élégant (non)." },
+      { t: "Lunettes de soleil catégorie 3", d: "Dès qu'il y a du soleil, et toujours en altitude", w: "En montagne, la lumière tape plus fort. Tes yeux ne bronzent pas, ils souffrent." },
+    ]},
+  { region: "tete", zone: "la gorge et le nez", keys: ["gorge", "nez", "sinus", "oreille", "oreilles", "langue", "levre", "bouche", "rhume"],
+    diag: { t: "La gorge du col venté", w: "Air froid et sec, poussière du sentier, respiration par la bouche pendant deux heures : la gorge et le nez font la grimace. Avec de la fièvre, on ne court pas, on se couvre." },
+    exos: [
+      { t: "Tour de cou (buff) devant la bouche", d: "Quand il fait froid, sur la première demi-heure", w: "L'air passe à travers le tissu et se réchauffe un peu. Tu ressembles à un bandit de grand chemin. Assume." },
+      { t: "Boire par petites gorgées", d: "Toutes les 15 min en sortie", w: "Une gorge sèche est une gorge qui proteste. Hydrate-la avant qu'elle ne fasse grève." },
+    ]},
+  { zone: "la peau", keys: ["peau", "coup de soleil", "coups de soleil", "brulure", "griffure", "ronces", "piqure", "egratignure"],
+    diag: { t: "Le traileur écorché", w: "Ronces, soleil d'altitude, chute dans les cailloux : la peau prend tout. C'est l'organe le plus grand du corps, et le plus maltraité en trail." },
+    exos: [
+      { t: "Crème solaire indice 50", d: "Avant le départ, et à mi-course si soleil", w: "En altitude, les UV tapent plus fort. Le bronzage du traileur (marque du tee-shirt) n'est pas un trophée." },
+      { t: "Nettoyer, désinfecter, couvrir", d: "Dès le retour, eau et savon", w: "Une écorchure propre guérit vite. Une écorchure oubliée devient une histoire. Si ça rougit et chauffe : médecin." },
+    ]},
+  { region: "tronc", zone: "le souffle", keys: ["souffle", "essouffle", "essoufflee", "essoufflement", "respiration", "cardio", "en apnee"],
+    diag: { t: "Le souffle de la locomotive", w: "Être essoufflé en montée, c'est le principe de la montée. Le souffle se construit avec des mois d'endurance tranquille. Essoufflé au repos, ou avec une douleur dans la poitrine : ça, c'est médecin." },
+    exos: [
+      { t: "Le test de la conversation", d: "En footing, tu dois pouvoir dire une phrase complète", w: "Si tu ne peux pas raconter ta semaine en courant, tu cours trop vite. 80 % des sorties devraient être bavardes." },
+      { t: "Marcher en côte", d: "Dès que la pente dépasse ton envie", w: "En trail, marcher n'est pas une honte, c'est une stratégie. Les élites le font. Toi aussi, maintenant." },
+    ]},
+  // ── Ce qu'on ne traite pas en rigolant : médecin, sans attendre ──
+  { zone: "la poitrine", serious: true,
+    keys: ["poitrine", "thorax", "palpitation", "palpitations", "coeur qui bat", "coeur qui s'emballe", "coeur qui s emballe", "s emballe", "emballe", "coeur bat vite", "bat trop vite", "tachycardie", "arythmie", "douleur thoracique", "oppression", "poumon", "poumons", "mal a respirer", "du mal a respirer", "difficulte a respirer", "malaise", "evanoui", "vertige", "vertiges"],
+    diag: { t: "Là, on arrête les blagues", w: "" }, exos: [] },
   // ── Zone intime (on sait que quelqu'un va tester) ──
   { zone: "la zone intime", intimate: true,
     keys: ["vulve", "vagin", "chatte", "foufoune", "minou", "zezette", "sexe", "parties intimes", "parties", "clitoris", "grandes levres", "petites levres",
@@ -432,12 +491,12 @@ const KB = [
       { t: "Crème anti-frottement", d: "Une noisette, généreusement, avant chaque sortie longue", w: "Les cyclistes l'appellent « crème de chamois ». Les traileurs l'appellent « la crème dont on ne parle pas »." },
     ]},
   // ── Le reste du corps (et de l'âme) ──
-  { zone: "la tête", keys: ["tete", "crane", "migraine", "gueule de bois", "mal de tete", "cerveau"],
+  { region: "tete", zone: "la tête", keys: ["tete", "crane", "front", "tempe", "tempes", "cheveux", "cuir chevelu", "migraine", "gueule de bois", "mal de tete", "cerveau"],
     diag: { t: "La tête du lendemain", w: "80 % de déshydratation, 20 % de la conversation d'hier soir. Une vraie migraine qui ne passe pas, c'est un médecin, pas un chat." },
     exos: [
       { t: "Hydratation active", d: "1 grand verre d'eau, puis un autre, puis on discute", w: "Avec une pincée de sel, c'est encore mieux. Sans tequila, c'est mieux aussi." },
     ]},
-  { zone: "partout", keys: ["partout", "tout", "entier", "corps", "tout le corps", "de partout", "jambes", "jambe"],
+  { zone: "partout", keys: ["partout", "tout", "entier", "corps", "tout le corps", "de partout", "jambes", "jambe", "muscles", "articulations", "os", "tendon", "tendons", "courbaturé"],
     diag: { t: "Le syndrome du « j'ai trop forcé »", w: "Quand tout fait mal, ce n'est souvent pas une blessure : c'est une grosse semaine. Ton corps demande du sommeil, pas un diagnostic." },
     exos: [
       { t: "Jambes au mur", d: "10 min, allongé, jambes à la verticale contre un mur", w: "Le seul exercice où ne rien faire est la consigne. Profites-en, ça n'arrivera plus." },
@@ -449,8 +508,8 @@ const KB = [
     exos: [
       { t: "Suspicion", d: "Vérifier immédiatement : as-tu couru cette semaine ?", w: "Un coureur de la team 0 to 100 qui n'a mal nulle part, c'est soit un mensonge, soit une semaine de repos. Les deux sont suspects." },
     ]},
-  { zone: "le cœur", keys: ["coeur", "moral", "motivation", "ame", "ego", "fierte", "abandon", "dnf"],
-    diag: { t: "Blessure d'ego", w: "Aucun muscle concerné. Toutes les fibres touchées." },
+  { zone: "le cœur", keys: ["coeur", "moral", "motivation", "ame", "ego", "fierte", "abandon", "dnf", "chagrin"],
+    diag: { t: "Blessure d'ego", w: "Aucun muscle concerné. Toutes les fibres touchées. (Et si c'est le vrai cœur, douleur dans la poitrine ou cœur qui s'emballe : ce n'est plus une blague, médecin tout de suite.)" },
     exos: [
       { t: "Relire le message du groupe WhatsApp", d: "1 fois, du début", w: "Rappel : vous êtes 30 à avoir dit oui à ça. Si ça, c'est pas une blessure collective." },
       { t: "Regarder la vidéo d'arrivée d'un finisher de la CCC", d: "1 fois, son à fond", w: "Dans 9 mois, c'est toi. Sèche tes larmes, il y a du renfo." },
@@ -471,7 +530,8 @@ const REGIONS = {
   epaule:   { keys: [], ask: "" },
   bras:     { keys: ["bras", "avant-bras", "avant bras"], ask: "Le bras : le coude ou le poignet ?" },
   nuque:    { keys: [], ask: "" },
-  tronc:    { keys: ["torse", "poitrine", "abdos", "abdominaux"], ask: "Le tronc… c'est un point de côté, un frottement, ou le ventre qui proteste ?" },
+  tete:     { keys: ["visage", "figure", "face"], ask: "Le visage : la tête, la mâchoire, les yeux, ou la gorge et le nez ?" },
+  tronc:    { keys: ["torse", "tronc"], ask: "Le tronc… c'est un point de côté, un frottement, ou le ventre qui proteste ?" },
 };
 
 // Contexte : on reprend ce que la personne a dit (côté, moment, type de douleur).
@@ -494,7 +554,7 @@ const CONTEXT = [
 ];
 
 const pick = a => a[Math.floor(Math.random() * a.length)];
-const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’']/g, " ").replace(/\s+/g, " ");
+const norm = s => s.toLowerCase().replace(/œ/g, "oe").replace(/æ/g, "ae").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’']/g, " ").replace(/\s+/g, " ");
 const has = (t, w) => new RegExp("(^|[^a-z])" + norm(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(s|x)?(?![a-z])").test(t);
 
 // Score d'une liste de clés sur un texte : la clé la plus spécifique gagne (longueur cumulée).
@@ -627,7 +687,7 @@ function chips(items) {
 
 const REGION_CHIPS = [["Genou", "genou"], ["Cheville", "cheville"], ["Pied", "pied"], ["Mollet", "mollet"], ["Tendon d'Achille", "achille"],
   ["Tibia", "tibia"], ["Cuisse", "cuisse"], ["Hanche / fesse", "hanche"], ["Dos", "dos"], ["Épaule", "epaule"], ["Coude / poignet", "bras"],
-  ["Nuque", "nuque"], ["Ventre / côtes", "torse"], ["Partout", "partout"], ["Nulle part", "nulle part"]];
+  ["Nuque", "nuque"], ["Visage", "visage"], ["Ventre / côtes", "torse"], ["Partout", "partout"], ["Nulle part", "nulle part"]];
 
 function subChips(region) {
   return KB.filter(z => z.region === region).map(z => [z.zone.replace(/^(le |la |les |l')/, "").replace(/^./, c => c.toUpperCase()), z.zone]);
@@ -650,7 +710,16 @@ function intimate(text) {
     <div class="foot">AntoninGPT va maintenant s'allonger cinq minutes.</div>`;
 }
 
+// Douleur dans la poitrine, palpitations, essoufflement anormal, malaise : pas d'exercice, pas de vin, pas de blague.
+function serious() {
+  return `<p>Je pose mon verre.</p>
+    <div class="card antonin" style="border-style:solid;border-color:var(--accent)"><b>Douleur dans la poitrine, cœur qui s'emballe, souffle anormal, malaise : on arrête l'effort et on voit un médecin, sans attendre.</b>
+    Si c'est intense, si ça serre, si ça irradie dans le bras ou la mâchoire, ou si ça ne passe pas au repos : <b>15 (SAMU) ou 112</b>.</div>
+    <p>Ni exercice ni vin pour celle-là. Antonin non plus : c'est un médecin qu'il te faut. Je reprends les blagues dès que tu as vu quelqu'un. Promis.</p>`;
+}
+
 function prescription(zone, ctx, text) {
+  if (zone.serious) return serious();
   if (zone.intimate) return intimate(text || "");
   const e = pick(zone.exos), v = pick(VINS);
   const precis = ctx.filter(c => c.txt).map(c => c.txt);
@@ -679,7 +748,7 @@ async function ask(text, shown) {
     await botSay(`<p>${REGIONS[found.region].ask}</p>`, 1000);
     chips(subChips(found.region));
   } else if (found) {
-    await botSay(prescription(found.zone, ctx.length ? ctx : (shown ? lastCtx : []), text), found.zone.intimate ? 2600 : 1400 + Math.random() * 900);
+    await botSay(prescription(found.zone, ctx.length ? ctx : (shown ? lastCtx : []), text), found.zone.serious ? 600 : found.zone.intimate ? 2600 : 1400 + Math.random() * 900);
     lastCtx = [];
   } else {
     await botSay("<p>Hmm. Je ne localise pas. Antonin aurait mis la main dessus tout de suite, mais moi je n'ai pas de mains.</p><p>C'est plutôt où ?</p>", 1100);
