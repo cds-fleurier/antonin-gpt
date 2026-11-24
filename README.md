@@ -32,3 +32,16 @@ AntoninGPT n'est pas kiné. Antonin, lui, oui. Et il revient bientôt.
 - 2026-11-24 : noindex, champ 16 px + label, chat `role=log`, contraste `--text-muted`.
 - 2026-09-21 : barre d'onglets partagée du hub.
 - 2026-09-18 : v1.0.
+
+## v2 (24/11/2026) — anatomie détaillée
+- 41 zones précises (structure réelle + syndrome classique du coureur : fémoro-patellaire, tendon rotulien, bandelette ilio-tibiale,
+  patte d'oie, ménisque, poplité, talo-fibulaire, fibulaires, tibial postérieur, aponévrose, Morton, métatarses, ongle noir, ampoules,
+  jumeaux, soléaire, crampes, Achille corps/insertion, périostite, tibial antérieur, quadriceps, ischios, adducteurs, DOMS,
+  moyen fessier, piriforme, psoas/aine, trochanter, lombaires, sacro-iliaque, rhomboïdes, coiffe, épicondyle, De Quervain,
+  trapèzes, point de côté, frottements, ventre, tête, partout, nulle part, cœur).
+- Chaque réponse : carte « Diagnostic (très sérieux) » + 1 exercice + 1 vin.
+- Région seule (« genou », « pied », « dos »…) → AntoninGPT demande de préciser avec des puces (`REGIONS`, `subChips`).
+- Contexte repris dans la réponse (`CONTEXT`) : côté, moment (descente, montée, matin, nuit, escaliers), sensation (brûle, tire,
+  gonfle, « crac ») ; gonflement / « crac » / douleur la nuit → renvoi vers le vrai Antonin.
+- Clés : chaîne = expression, tableau = tous les mots présents ; la plus spécifique gagne ; une zone précise de la même région
+  l'emporte sur la question de précision. Test : script Node qui vérifie que chaque puce retombe sur sa zone + ~35 phrases réelles.
